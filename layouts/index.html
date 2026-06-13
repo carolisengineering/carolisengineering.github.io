@@ -1,0 +1,65 @@
+{{ define "main" }}
+{{ $css := resources.Get "css/portfolio.css" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+<!-- About Section -->
+<section class="section">
+  <div class="about-header">
+    {{ with hugo.Data.about.avatar }}
+      <img src="{{ . }}" class="about-avatar" alt="avatar">
+    {{ end }}
+    <div>
+      <h1 class="about-name">{{ hugo.Data.about.name }}</h1>
+      <p class="about-title">{{ hugo.Data.about.title }}</p>
+    </div>
+  </div>
+  <p class="about-bio">{{ hugo.Data.about.bio }}</p>
+  <div class="links">
+    {{ range hugo.Data.about.links }}
+      <a href="{{ .url }}" class="link-button" target="_blank">{{ .label }}</a>
+    {{ end }}
+  </div>
+</section>
+
+<!-- Experience Section -->
+<section class="section section-divider">
+  <h2 class="section-title">Experience</h2>
+  {{ range hugo.Data.about.experience }}
+  <div class="experience-item">
+    <div class="experience-header">
+      <h3 class="experience-role">{{ .role }}</h3>
+      <span class="experience-dates">{{ .start }} – {{ .end }}</span>
+    </div>
+    <p class="experience-company">{{ .company }}</p>
+    <ul class="experience-highlights">
+      {{ range .highlights }}
+        <li>{{ . }}</li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</section>
+
+<!-- Skills Section -->
+<section class="section section-divider">
+  <h2 class="section-title">Skills</h2>
+  <div>
+    {{ range hugo.Data.skills }}
+    <div class="cert-item">
+      <div>
+        <span class="cert-name">{{ .name }}</span>
+        <span class="cert-issuer">{{ .issuer }}</span>
+        <ul class="skills-languages">
+          {{ range .languages }}
+            <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+      <span class="cert-year">{{ .year }}</span>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+
+{{ end }}

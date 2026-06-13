@@ -1,0 +1,17 @@
+{
+  "name": "Carol",
+  "title": "Software Engineer",
+  "bio": "I solve technical problems.",
+  "avatar": "/images/avatar.jpg",
+  "links": [
+    { "label": "GitHub", "url": "https://github.com/carolisengineering" }
+  ],
+  "experience": [
+    {
+      "highlights": [
+        "Built internal tooling that reduced deploy time by 40%"
+        ]
+    }
+  ],
+  "tags": ["Python", "Java"]
+}
