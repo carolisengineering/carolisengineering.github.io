@@ -1,0 +1,4 @@
+baseURL = 'https://carolisengineering.github.io/'
+locale = 'en-us'
+title = 'carolisengineering'
+theme = 'ananke'
