@@ -1,65 +1,109 @@
 {{ define "main" }}
-{{ $css := resources.Get "css/portfolio.css" }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+<link rel="stylesheet" href="/css/portfolio.css">
 
-<!-- About Section -->
-<section class="section">
-  <div class="about-header">
+<!-- Hero / About -->
+<section class="hero">
+  <div class="hero-avatar">
     {{ with hugo.Data.about.avatar }}
-      <img src="{{ . }}" class="about-avatar" alt="avatar">
+      <img src="{{ . }}" alt="{{ hugo.Data.about.name }}">
+    {{ else }}
+      {{ slice hugo.Data.about.name | index 0 | printf "%c" }}
     {{ end }}
-    <div>
-      <h1 class="about-name">{{ hugo.Data.about.name }}</h1>
-      <p class="about-title">{{ hugo.Data.about.title }}</p>
-    </div>
   </div>
-  <p class="about-bio">{{ hugo.Data.about.bio }}</p>
-  <div class="links">
-    {{ range hugo.Data.about.links }}
-      <a href="{{ .url }}" class="link-button" target="_blank">{{ .label }}</a>
-    {{ end }}
+  <div>
+    <h1>{{ hugo.Data.about.name }}</h1>
+    <p class="hero-title">{{ hugo.Data.about.title }}</p>
+    <p class="hero-bio">{{ hugo.Data.about.bio }}</p>
+    <div class="hero-links">
+      {{ range hugo.Data.about.links }}
+        <a href="{{ .url }}" class="link-btn" target="_blank" rel="noopener">{{ .label }}</a>
+      {{ end }}
+    </div>
   </div>
 </section>
 
-<!-- Experience Section -->
-<section class="section section-divider">
-  <h2 class="section-title">Experience</h2>
-  {{ range hugo.Data.about.experience }}
-  <div class="experience-item">
-    <div class="experience-header">
-      <h3 class="experience-role">{{ .role }}</h3>
-      <span class="experience-dates">{{ .start }} – {{ .end }}</span>
+<!-- Experience -->
+{{ with hugo.Data.about.experience }}
+<section class="section">
+  <div class="section-label">Experience</div>
+  {{ range . }}
+  <div class="exp-card">
+    <div class="exp-header">
+      <span class="exp-role">{{ .role }}</span>
+      <span class="exp-dates">{{ .start }} – {{ .end }}</span>
     </div>
-    <p class="experience-company">{{ .company }}</p>
-    <ul class="experience-highlights">
-      {{ range .highlights }}
+    <p class="exp-company">{{ .company }}</p>
+    {{ with .highlights }}
+    <ul class="exp-highlights">
+      {{ range . }}
         <li>{{ . }}</li>
       {{ end }}
     </ul>
+    {{ end }}
   </div>
   {{ end }}
 </section>
+{{ end }}
 
-<!-- Skills Section -->
-<section class="section section-divider">
-  <h2 class="section-title">Skills</h2>
-  <div>
-    {{ range hugo.Data.skills }}
-    <div class="cert-item">
-      <div>
-        <span class="cert-name">{{ .name }}</span>
-        <span class="cert-issuer">{{ .issuer }}</span>
-        <ul class="skills-languages">
-          {{ range .languages }}
-            <li>{{ . }}</li>
-          {{ end }}
-        </ul>
-      </div>
-      <span class="cert-year">{{ .year }}</span>
+<!-- Certifications -->
+{{ with hugo.Data.about.certifications }}
+<section class="section">
+  <div class="section-label">Certifications</div>
+  <div class="cert-grid">
+    {{ range . }}
+    <div class="cert-card">
+      <div class="cert-name">{{ .name }}</div>
+      <div class="cert-issuer">{{ .issuer }}</div>
+      <div class="cert-year">{{ .year }}</div>
     </div>
     {{ end }}
   </div>
 </section>
+{{ end }}
 
+<!-- Skills -->
+{{ with hugo.Data.about.skills }}
+<section class="section">
+  <div class="section-label">Skills</div>
+  <div class="cert-grid">
+    {{ range $category, $items := . }}
+    <div class="cert-card">
+      <div class="cert-name">{{ $category }}</div>
+      <div class="tags" style="margin-top:0.5rem;">
+        {{ range $items }}
+          <span class="tag tag-teal">{{ . }}</span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<!-- Projects -->
+{{ with hugo.Data.projects }}
+<section class="section">
+  <div class="section-label">Projects</div>
+  <div class="proj-grid">
+    {{ range . }}
+    <div class="proj-card">
+      <div class="proj-title">
+        {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}
+          {{ .title }}
+        {{ with .url }}</a>{{ end }}
+      </div>
+      <p class="proj-desc">{{ .description }}</p>
+      {{ with .tags }}
+      <div class="tags">
+        {{ range . }}
+          <span class="tag tag-blue">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
 
 {{ end }}
