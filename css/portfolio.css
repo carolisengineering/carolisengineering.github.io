@@ -145,15 +145,15 @@ body {
 /* ── Certifications ───────────────────────────────── */
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1.25rem;
 }
 
 .cert-card {
   background: #0A2520;
   border: 0.5px solid #1A4038;
   border-radius: 12px;
-  padding: 1rem 1.25rem;
+  padding: 1.5rem 1.75rem;
 }
 
 .cert-name {
@@ -177,15 +177,15 @@ body {
 /* ── Projects ─────────────────────────────────────── */
 .proj-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr));
+  gap: 1.25rem;
 }
 
 .proj-card {
   background: #0E1E25;
   border: 0.5px solid #1E3340;
   border-radius: 12px;
-  padding: 1rem 1.25rem;
+  padding: 1.75rem 2rem;
 }
 
 .proj-title {
