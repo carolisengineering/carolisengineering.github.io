@@ -1,0 +1,36 @@
+[
+  {
+    "title": "strength-in-numbers",
+    "description": "Mobile-first workout logging and progress tracking web app",
+    "url": "https://github.com/carolisengineering/strength-in-numbers",
+    "tags": [
+      "TypeScript",
+      "Fastify",
+      "Prisma",
+      "PostgreSQL",
+      "Docker"
+    ]
+  },
+  {
+    "title": "office-hours",
+    "description": "Student-support agent grounded in a program knowledge base, built on the Claude Agent SDK",
+    "url": "https://github.com/carolisengineering/office-hours",
+    "tags": [
+      "Python",
+      "Claude Agent SDK",
+      "RAG",
+      "Evals",
+      "Langfuse",
+      "Red-teaming"
+    ]
+  },
+  {
+    "title": "carolisengineering.github.io",
+    "description": "This site - a portfolio deployed to GitHub Pages via GitHub Actions",
+    "url": "https://github.com/carolisengineering/carolisengineering.github.io",
+    "tags": [
+      "Hugo",
+      "GitHub Actions"
+    ]
+  }
+]

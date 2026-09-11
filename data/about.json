@@ -4,19 +4,86 @@
   "bio": "I solve technical problems with code and communication.",
   "avatar": "/images/c.png",
   "links": [
-    { "label": "GitHub", "url": "https://github.com/carolisengineering" }
-  ],
-  "experience": [
     {
-      "highlights": [
-        "Built internal tooling that reduced deploy time by 40%"
-      ]
+      "label": "GitHub",
+      "url": "https://github.com/carolisengineering"
     }
   ],
-  "skills": {
-    "Languages": ["Java", "Python", "Go"],
-    "Infrastructure": ["Kubernetes", "Docker"],
-    "Observability": ["Grafana", "Prometheus"]
-  },
-  "tags": ["Python", "Java"]
+  "skills": [
+    {
+      "category": "Languages",
+      "items": [
+        "Python",
+        "Java",
+        "Go",
+        "JavaScript"
+      ]
+    },
+    {
+      "category": "Frameworks",
+      "items": [
+        "Spring",
+        "FastAPI",
+        "Django",
+        "Fastify"
+      ]
+    },
+    {
+      "category": "Testing",
+      "items": [
+        "JUnit",
+        "pytest",
+        "testify"
+        ]
+    },
+    {
+      "category": "Infrastructure",
+      "items": [
+        "Kubernetes",
+        "Docker",
+        "Azure",
+        "AWS",
+        "GCP"
+      ]
+    },
+    {
+      "category": "Databases",
+      "items": [
+        "MongoDB",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "category": "Message Brokers",
+      "items": [
+        "RabbitMQ",
+        "Redis",
+        "Azure Service Bus"
+      ]
+    },
+    {
+      "category": "Observability",
+      "items": [
+        "Grafana",
+        "Prometheus",
+        "New Relic"
+      ]
+    },
+    {
+      "category": "CI/CD",
+      "items": [
+        "GitHub Actions",
+        "Jenkins",
+        "Harness"
+      ]
+    },
+    {
+      "category": "AI Tooling",
+      "items": [
+        "Claude Code",
+        "GitHub Copilot",
+        "Cursor"
+      ]
+    }
+  ]
 }

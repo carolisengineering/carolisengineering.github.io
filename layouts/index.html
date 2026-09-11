@@ -45,6 +45,23 @@
 </section>
 {{ end }}
 
+<!-- Education -->
+{{ with hugo.Data.about.education }}
+<section class="section">
+  <div class="section-label">Education</div>
+  {{ range . }}
+  <div class="exp-card">
+    <div class="exp-header">
+      <span class="exp-role">{{ .degree }}</span>
+      <span class="exp-dates">{{ .location }}</span>
+    </div>
+    <p class="exp-company">{{ .school }}</p>
+    {{ with .note }}<ul class="exp-highlights"><li>{{ . }}</li></ul>{{ end }}
+  </div>
+  {{ end }}
+</section>
+{{ end }}
+
 <!-- Certifications -->
 {{ with hugo.Data.about.certifications }}
 <section class="section">
@@ -55,25 +72,6 @@
       <div class="cert-name">{{ .name }}</div>
       <div class="cert-issuer">{{ .issuer }}</div>
       <div class="cert-year">{{ .year }}</div>
-    </div>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
-
-<!-- Skills -->
-{{ with hugo.Data.about.skills }}
-<section class="section">
-  <div class="section-label">Skills</div>
-  <div class="cert-grid">
-    {{ range $category, $items := . }}
-    <div class="cert-card">
-      <div class="cert-name">{{ $category }}</div>
-      <div class="tags" style="margin-top:0.5rem;">
-        {{ range $items }}
-          <span class="tag tag-teal">{{ . }}</span>
-        {{ end }}
-      </div>
     </div>
     {{ end }}
   </div>
@@ -100,6 +98,25 @@
         {{ end }}
       </div>
       {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<!-- Skills -->
+{{ with hugo.Data.about.skills }}
+<section class="section">
+  <div class="section-label">Skills</div>
+  <div class="cert-grid">
+    {{ range . }}
+    <div class="cert-card">
+      <div class="cert-name">{{ .category }}</div>
+      <div class="tags" style="margin-top:0.5rem;">
+        {{ range .items }}
+          <span class="tag tag-teal">{{ . }}</span>
+        {{ end }}
+      </div>
     </div>
     {{ end }}
   </div>

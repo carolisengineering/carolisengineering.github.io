@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:65114/</loc>
+    <loc>https://carolisengineering.github.io/</loc>
   </url><url>
-    <loc>http://localhost:65114/categories/</loc>
+    <loc>https://carolisengineering.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:65114/tags/</loc>
+    <loc>https://carolisengineering.github.io/tags/</loc>
   </url>
 </urlset>
