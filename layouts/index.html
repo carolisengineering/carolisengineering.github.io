@@ -1,126 +1,79 @@
 {{ define "main" }}
-<link rel="stylesheet" href="/css/portfolio.css">
-
-<!-- Hero / About -->
-<section class="hero">
-  <div class="hero-avatar">
-    {{ with hugo.Data.about.avatar }}
-      <img src="{{ . }}" alt="{{ hugo.Data.about.name }}">
-    {{ else }}
-      {{ slice hugo.Data.about.name | index 0 | printf "%c" }}
-    {{ end }}
-  </div>
-  <div>
-    <h1>{{ hugo.Data.about.name }}</h1>
-    <p class="hero-title">{{ hugo.Data.about.title }}</p>
-    <p class="hero-bio">{{ hugo.Data.about.bio }}</p>
-    <div class="hero-links">
-      {{ range hugo.Data.about.links }}
-        <a href="{{ .url }}" class="link-btn" target="_blank" rel="noopener">{{ .label }}</a>
-      {{ end }}
+{{ partial "placeholder-check.html" . }}
+{{ partial "required-check.html" . }}
+{{ $about := hugo.Data.about }}
+<div class="container">
+  <section class="hero" aria-labelledby="hero-title">
+    {{- with $about.now }}
+    <p class="now-pill">{{ . }}</p>
+    {{- end }}
+    <h1 id="hero-title">{{ $about.headline }}{{ with $about.headlineHighlight }} <span class="highlight">{{ . }}</span>{{ end }}</h1>
+    {{- with $about.lede }}
+    <p class="lede">{{ . }}</p>
+    {{- end }}
+    <div class="hero-actions">
+      <a class="button button--primary" href="#projects">See projects</a>
+      {{- range $about.links }}
+      <a class="button" href="{{ .url }}" rel="noopener">{{ .label }}</a>
+      {{- end }}
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Experience -->
-{{ with hugo.Data.about.experience }}
-<section class="section">
-  <div class="section-label">Experience</div>
-  {{ range . }}
-  <div class="exp-card">
-    <div class="exp-header">
-      <span class="exp-role">{{ .role }}</span>
-      <span class="exp-dates">{{ .start }} – {{ .end }}</span>
+  <section id="projects" class="section" aria-labelledby="projects-title">
+    <h2 id="projects-title">Projects</h2>
+    <div class="tiles">
+      {{- range $i, $p := (where site.RegularPages "Section" "projects").ByWeight }}
+      {{ partial "project-tile.html" (dict "page" $p "index" $i) }}
+      {{- end }}
     </div>
-    <p class="exp-company">{{ .company }}</p>
-    {{ with .highlights }}
-    <ul class="exp-highlights">
-      {{ range . }}
-        <li>{{ . }}</li>
-      {{ end }}
+  </section>
+
+  <section id="about" class="section" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    {{- with $about.intro }}
+    <p class="intro">{{ . }}</p>
+    {{- end }}
+    {{- with $about.facts }}
+    <ul class="facts">
+      {{- range $i, $f := . }}
+      <li class="fact {{ cond (modBool $i 2) "fact--primary" "fact--secondary" }}">
+        <span class="fact-value">{{ $f.value }}</span>
+        <span class="fact-label">{{ $f.label }}</span>
+      </li>
+      {{- end }}
     </ul>
-    {{ end }}
-  </div>
-  {{ end }}
-</section>
-{{ end }}
+    {{- end }}
+  </section>
 
-<!-- Education -->
-{{ with hugo.Data.about.education }}
-<section class="section">
-  <div class="section-label">Education</div>
-  {{ range . }}
-  <div class="exp-card">
-    <div class="exp-header">
-      <span class="exp-role">{{ .degree }}</span>
-      <span class="exp-dates">{{ .location }}</span>
-    </div>
-    <p class="exp-company">{{ .school }}</p>
-    {{ with .note }}<ul class="exp-highlights"><li>{{ . }}</li></ul>{{ end }}
-  </div>
-  {{ end }}
-</section>
-{{ end }}
+  {{- with $about.experience }}
+  <section id="experience" class="section" aria-labelledby="experience-title">
+    <h2 id="experience-title">Experience</h2>
+    <ol class="timeline">
+      {{- range . }}
+      <li class="timeline-row">
+        <span class="timeline-years">{{ .start }} – {{ .end }}</span>
+        <div>
+          <p class="timeline-role">{{ .role }} · <span class="industry">{{ .industry }}</span></p>
+          <p class="timeline-summary">{{ .summary }}</p>
+        </div>
+      </li>
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
 
-<!-- Certifications -->
-{{ with hugo.Data.about.certifications }}
-<section class="section">
-  <div class="section-label">Certifications</div>
-  <div class="cert-grid">
-    {{ range . }}
-    <div class="cert-card">
-      <div class="cert-name">{{ .name }}</div>
-      <div class="cert-issuer">{{ .issuer }}</div>
-      <div class="cert-year">{{ .year }}</div>
-    </div>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
-
-<!-- Projects -->
-{{ with hugo.Data.projects }}
-<section class="section">
-  <div class="section-label">Projects</div>
-  <div class="proj-grid">
-    {{ range . }}
-    <div class="proj-card">
-      <div class="proj-title">
-        {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}
-          {{ .title }}
-        {{ with .url }}</a>{{ end }}
+  {{- with $about.skills }}
+  <section id="skills" class="section" aria-labelledby="skills-title">
+    <h2 id="skills-title">Skills</h2>
+    <dl class="skills">
+      {{- range . }}
+      <div class="skill-row">
+        <dt>{{ .category }}</dt>
+        <dd>{{ delimit .items ", " }}</dd>
       </div>
-      <p class="proj-desc">{{ .description }}</p>
-      {{ with .tags }}
-      <div class="tags">
-        {{ range . }}
-          <span class="tag tag-blue">{{ . }}</span>
-        {{ end }}
-      </div>
-      {{ end }}
-    </div>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
-
-<!-- Skills -->
-{{ with hugo.Data.about.skills }}
-<section class="section">
-  <div class="section-label">Skills</div>
-  <div class="cert-grid">
-    {{ range . }}
-    <div class="cert-card">
-      <div class="cert-name">{{ .category }}</div>
-      <div class="tags" style="margin-top:0.5rem;">
-        {{ range .items }}
-          <span class="tag tag-teal">{{ . }}</span>
-        {{ end }}
-      </div>
-    </div>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
-
+      {{- end }}
+    </dl>
+  </section>
+  {{- end }}
+</div>
 {{ end }}

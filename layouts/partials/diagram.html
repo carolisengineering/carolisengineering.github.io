@@ -1,0 +1,38 @@
+{{- /* Architecture diagram from front matter. Warns on malformed data so --panicOnWarning blocks a deploy. */ -}}
+{{- $nodes := .nodes | default slice -}}
+{{- $count := len $nodes -}}
+{{- if or (lt $count 3) (gt $count 4) -}}
+  {{- warnf "diagram for %s has %d nodes; it needs 3–4" .name $count -}}
+{{- end -}}
+{{- $labels := slice -}}
+{{- range $i, $node := $nodes -}}
+  {{- if not $node.label -}}
+    {{- warnf "diagram for %s: node %d is missing label" $.name (add $i 1) -}}
+  {{- end -}}
+  {{- $labels = $labels | append $node.label -}}
+  {{- $last := eq (add $i 1) $count -}}
+  {{- if and (not $last) (not $node.next) -}}
+    {{- warnf "diagram for %s: node %q needs a next connector" $.name $node.label -}}
+  {{- end -}}
+  {{- if and $last $node.next -}}
+    {{- warnf "diagram for %s: last node %q must not have next" $.name $node.label -}}
+  {{- end -}}
+  {{- with $node.style -}}
+    {{- if not (in (slice "primary" "secondary") .) -}}
+      {{- warnf "diagram for %s: unknown style %q on node %q" $.name . $node.label -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<div class="diagram diagram--{{ .size }}" role="img" aria-label="{{ delimit $labels " to " }}">
+  {{- range $i, $node := $nodes }}
+  {{- if eq $i 0 }}
+  {{ partial "inline/diagram-node.html" $node }}
+  {{- else }}
+  <span class="step"><span class="edge" aria-hidden="true">{{ (index $nodes (sub $i 1)).next }}</span>{{ partial "inline/diagram-node.html" $node }}</span>
+  {{- end }}
+  {{- end }}
+</div>
+
+{{- define "partials/inline/diagram-node.html" -}}
+<span class="node{{ with .style }} node--{{ . }}{{ end }}">{{ .label }}</span>
+{{- end -}}

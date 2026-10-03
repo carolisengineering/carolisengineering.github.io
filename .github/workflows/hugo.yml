@@ -9,16 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.166.0'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install test dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      # REQUIRE_FILLED also fails on a [TODO anywhere in the output, including case-study bodies.
+      - name: Test
+        run: npm test
+        env:
+          REQUIRE_FILLED: '1'
 
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --panicOnWarning
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

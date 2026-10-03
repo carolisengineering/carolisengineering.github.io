@@ -1,0 +1,27 @@
+{{- $p := .page -}}
+{{- $featured := eq .index 0 -}}
+{{- $href := $p.RelPermalink -}}
+{{- $arrow := "→" -}}
+{{- if not $href -}}
+  {{- $href = $p.Params.repo -}}
+  {{- $arrow = "↗" -}}
+{{- end -}}
+{{- $id := printf "tile-%s" (urlize $p.File.ContentBaseName) -}}
+{{- /* Non-featured tiles alternate diagram panels: index 1 petrol, 2 maroon, 3 petrol… */ -}}
+{{- $panel := cond (modBool .index 2) "panel--secondary" "panel--primary" -}}
+<a class="tile{{ if $featured }} tile--featured{{ end }}" href="{{ $href }}"{{ if eq $arrow "↗" }} rel="noopener"{{ end }} aria-labelledby="{{ $id }}-name"{{ if and $featured $p.Params.summary }} aria-describedby="{{ $id }}-summary"{{ end }}>
+  <div class="tile-diagram{{ if not $featured }} {{ $panel }}{{ end }}">
+    {{ partial "diagram.html" (dict "nodes" $p.Params.diagram "size" "compact" "name" $p.Title) }}
+  </div>
+  <h3 class="tile-title"><span class="tile-name" id="{{ $id }}-name">{{ $p.Title }}</span> <span class="arrow" aria-hidden="true">{{ $arrow }}</span></h3>
+  {{- if $featured }}{{ with $p.Params.summary }}
+  <p class="tile-summary" id="{{ $id }}-summary">{{ . }}</p>
+  {{- end }}{{ end }}
+  {{- with $p.Params.tags }}
+  <ul class="tags" aria-label="Tech">
+    {{- range . }}
+    <li>{{ . }}</li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</a>

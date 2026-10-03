@@ -1,0 +1,48 @@
+{{ define "main" }}
+<article class="container case-study">
+  <header class="cs-header">
+    <p><a class="back-link" href="{{ "/#projects" | relURL }}">← All projects</a></p>
+    <h1>{{ .Title }}</h1>
+    <p class="lede">{{ .Params.lede | default .Params.summary }}</p>
+    {{- with .Params.tags }}
+    <ul class="tags" aria-label="Tech">
+      {{- range . }}
+      <li>{{ . }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    {{- with .Params.repo }}
+    <p><a class="repo-link" href="{{ . }}" rel="noopener">Repo ↗</a></p>
+    {{- end }}
+  </header>
+
+  <div class="cs-hero panel--primary">
+    {{ partial "diagram.html" (dict "nodes" .Params.diagram "size" "large" "name" .Title) }}
+  </div>
+
+  <div class="cs-body">
+    <div class="toc">{{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="On this page">` | safeHTML }}</div>
+    <div class="cs-article">{{ .Content }}</div>
+  </div>
+</article>
+<script>
+  (() => {
+    const links = new Map();
+    document.querySelectorAll('.toc a[href^="#"]').forEach((a) => {
+      links.set(decodeURIComponent(a.getAttribute('href').slice(1)), a);
+    });
+    if (!links.size || !('IntersectionObserver' in window)) return;
+    const setActive = (id) => links.forEach((a, key) => a.classList.toggle('is-active', key === id));
+    // A heading becomes active once it enters the top 30% of the viewport.
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((e) => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible.length) setActive(visible[0].target.id);
+    }, { rootMargin: '0px 0px -70% 0px' });
+    links.forEach((_, id) => {
+      const heading = document.getElementById(id);
+      if (heading) observer.observe(heading);
+    });
+  })();
+</script>
+{{ end }}

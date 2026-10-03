@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <ul class="footer-links">
+      {{ range hugo.Data.about.links }}
+      <li><a href="{{ .url }}" rel="noopener">{{ .label }}</a></li>
+      {{ end }}
+    </ul>
+    <p>Built with Hugo</p>
+  </div>
+</footer>

@@ -1,89 +1,32 @@
 {
   "name": "Carol",
-  "title": "Software Engineer",
-  "bio": "I solve technical problems with code and communication.",
-  "avatar": "/images/c.png",
+  "headline": "I solve technical problems with",
+  "headlineHighlight": "code and communication.",
+  "lede": "backend systems, infrastructure, AI agents and more",
+  "intro": "I build full-stack software systems, using agentic workflows to enhance efficiency.",
+  "facts": [
+    { "value": "5 years", "label": "building production software" },
+    { "value": "4 languages", "label": "Python, Java, Go, JavaScript" },
+    { "value": "3 clouds", "label": "AWS, Azure, GCP" }
+  ],
+  "experience": [
+    { "start": "2023", "end": "now", "role": "Advanced Software Engineer", "industry": "Legal", "summary": "Owns a distributed pipeline processing sensitive data" },
+    { "start": "2021", "end": "2023", "role": "Software Engineer", "industry": "Communications", "summary": "Built and maintained custom billing and inventory systems" }
+
+  ],
   "links": [
-    {
-      "label": "GitHub",
-      "url": "https://github.com/carolisengineering"
-    }
+    { "label": "GitHub", "url": "https://github.com/carolisengineering" }
   ],
   "skills": [
-    {
-      "category": "Languages",
-      "items": [
-        "Python",
-        "Java",
-        "Go",
-        "JavaScript"
-      ]
-    },
-    {
-      "category": "Frameworks",
-      "items": [
-        "Spring",
-        "FastAPI",
-        "Django",
-        "Fastify"
-      ]
-    },
-    {
-      "category": "Testing",
-      "items": [
-        "JUnit",
-        "pytest",
-        "testify"
-        ]
-    },
-    {
-      "category": "Infrastructure",
-      "items": [
-        "Kubernetes",
-        "Docker",
-        "Azure",
-        "AWS",
-        "GCP"
-      ]
-    },
-    {
-      "category": "Databases",
-      "items": [
-        "MongoDB",
-        "PostgreSQL"
-      ]
-    },
-    {
-      "category": "Message Brokers",
-      "items": [
-        "RabbitMQ",
-        "Redis",
-        "Azure Service Bus"
-      ]
-    },
-    {
-      "category": "Observability",
-      "items": [
-        "Grafana",
-        "Prometheus",
-        "New Relic"
-      ]
-    },
-    {
-      "category": "CI/CD",
-      "items": [
-        "GitHub Actions",
-        "Jenkins",
-        "Harness"
-      ]
-    },
-    {
-      "category": "AI Tooling",
-      "items": [
-        "Claude Code",
-        "GitHub Copilot",
-        "Cursor"
-      ]
-    }
+    { "category": "Languages", "items": ["Python", "Java", "Go", "JavaScript"] },
+    { "category": "Frameworks", "items": ["Spring", "FastAPI", "Django", "Fastify"] },
+    { "category": "Libraries", "items": ["React", "asyncio", "Alembic", "Jackson", "zod"]},
+    { "category": "Testing", "items": ["JUnit", "Mockito", "pytest", "unittest", "testify"] },
+    { "category": "Infrastructure", "items": ["Kubernetes", "Docker", "Azure", "AWS", "GCP"] },
+    { "category": "Databases", "items": ["MongoDB", "PostgreSQL"] },
+    { "category": "Message Brokers", "items": ["Azure Service Bus", "Redis", "RabbitMQ"] },
+    { "category": "Observability", "items": ["Grafana", "Prometheus", "New Relic"] },
+    { "category": "CI/CD", "items": ["GitHub Actions", "Jenkins", "Harness"] },
+    { "category": "AI-Assisted Development", "items": ["Claude Code", "GitHub Copilot", "Cursor"] }
   ]
 }
