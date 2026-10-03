@@ -6,7 +6,7 @@
   "intro": "I build full-stack software systems, using agentic workflows to enhance efficiency.",
   "facts": [
     { "value": "5 years", "label": "building production software" },
-    { "value": "4 languages", "label": "Python, Java, Go, JavaScript" },
+    { "value": "5 languages", "label": "Python, Java, Go, JavaScript, TypeScript" },
     { "value": "3 clouds", "label": "AWS, Azure, GCP" }
   ],
   "experience": [
@@ -18,7 +18,7 @@
     { "label": "GitHub", "url": "https://github.com/carolisengineering" }
   ],
   "skills": [
-    { "category": "Languages", "items": ["Python", "Java", "Go", "JavaScript"] },
+    { "category": "Languages", "items": ["Python", "Java", "Go", "JavaScript", "TypeScript"] },
     { "category": "Frameworks", "items": ["Spring", "FastAPI", "Django", "Fastify"] },
     { "category": "Libraries", "items": ["React", "asyncio", "Alembic", "Jackson", "zod"]},
     { "category": "Testing", "items": ["JUnit", "Mockito", "pytest", "unittest", "testify"] },

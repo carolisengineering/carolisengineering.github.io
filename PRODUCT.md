@@ -52,7 +52,7 @@ Carol solves technical problems with code and communication: an engineer who bui
 
 ## Evidence on Hand
 
-- `data/about.json`: 5 years building production software; 4 languages (Python, Java, Go, JavaScript); 3 clouds (AWS, Azure, GCP); two roles, in the legal and communications industries; skills in ten categories.
+- `data/about.json`: 5 years building production software; 5 languages (Python, Java, Go, JavaScript, TypeScript); 3 clouds (AWS, Azure, GCP); two roles, in the legal and communications industries; skills in ten categories.
 - `content/projects/office-hours.md`: full case study of a student-support agent on the Claude Agent SDK, with eval and red-team results.
 - `content/projects/strength-in-numbers.md`: full case study of a workout-tracking web app. The app itself is in progress (set logging and the workout screen are not built) and has no users yet, so its results are about correctness, not usage.
 - `content/projects/this-site.md`: tile only, links to the repo.

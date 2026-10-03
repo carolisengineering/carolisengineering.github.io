@@ -31,7 +31,7 @@ The eval harness runs every case five times and reports rates with 95% confidenc
 
 ## Decisions & Tradeoffs
 
-{{< decision >}}Use a small agent model and a larger model as the judge. It is harder to achieve consistent results from Haiku, and using an Opus judge means the grader won't share all of the agent's blind spots.{{< /decision >}}
+{{< decision >}}Use a small agent model and a larger model as the judge. It is harder to achieve consistent results from Haiku, and using a Sonnet judge means the grader won't share all of the agent's blind spots.{{< /decision >}}
 
 
 The knowledge base is synthetic, which makes the corpus less realistic, but allows the answer key to be controlled. 
