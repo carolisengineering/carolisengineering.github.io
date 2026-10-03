@@ -8,7 +8,9 @@ const squash = (s) => s.replace(/\s+/g, ' ').trim();
 const withAbout = (change) => buildSite({ about: (a) => change(fillPlaceholders(a)) }).html('index.html');
 
 test('hero shows the now pill, headline with maroon highlight, and lede', () => {
-  assert.equal(doc.querySelector('.hero .now-pill').text.trim(), about.now);
+  const pill = doc.querySelector('.hero .now-pill');
+  if (about.now) assert.equal(pill.text.trim(), about.now);
+  else assert.equal(pill, null);
   const h1 = doc.querySelector('.hero h1');
   assert.equal(squash(h1.text), `${about.headline} ${about.headlineHighlight}`);
   assert.equal(h1.querySelector('.highlight').text.trim(), about.headlineHighlight);
