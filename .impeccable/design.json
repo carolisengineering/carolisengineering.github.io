@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T20:32:03.529Z",
+  "title": "Design System: carolisengineering",
+  "extensions": {
+    "colorMeta": {
+      "petrol": {
+        "role": "primary",
+        "displayName": "Petrol",
+        "canonical": "#1D5F7A",
+        "tonalRamp": [
+          "oklch(15.0% 0.078 230)",
+          "oklch(26.0% 0.078 230)",
+          "oklch(38.0% 0.078 230)",
+          "oklch(49.0% 0.078 230)",
+          "oklch(61.0% 0.078 230)",
+          "oklch(72.0% 0.078 230)",
+          "oklch(84.0% 0.040 230)",
+          "oklch(95.0% 0.040 230)"
+        ]
+      },
+      "petrol-dark": {
+        "role": "primary",
+        "displayName": "Petrol Dark",
+        "canonical": "#174C62",
+        "tonalRamp": [
+          "oklch(15.0% 0.066 230)",
+          "oklch(26.0% 0.066 230)",
+          "oklch(38.0% 0.066 230)",
+          "oklch(49.0% 0.066 230)",
+          "oklch(61.0% 0.066 230)",
+          "oklch(72.0% 0.066 230)",
+          "oklch(84.0% 0.040 230)",
+          "oklch(95.0% 0.040 230)"
+        ]
+      },
+      "petrol-tint": {
+        "role": "primary",
+        "displayName": "Petrol Tint",
+        "canonical": "#E6F0F3",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 218)",
+          "oklch(26.0% 0.011 218)",
+          "oklch(38.0% 0.011 218)",
+          "oklch(49.0% 0.011 218)",
+          "oklch(61.0% 0.011 218)",
+          "oklch(72.0% 0.011 218)",
+          "oklch(84.0% 0.011 218)",
+          "oklch(95.0% 0.011 218)"
+        ]
+      },
+      "maroon": {
+        "role": "secondary",
+        "displayName": "Maroon",
+        "canonical": "#6E2230",
+        "tonalRamp": [
+          "oklch(15.0% 0.108 13)",
+          "oklch(26.0% 0.108 13)",
+          "oklch(38.0% 0.108 13)",
+          "oklch(49.0% 0.108 13)",
+          "oklch(61.0% 0.108 13)",
+          "oklch(72.0% 0.108 13)",
+          "oklch(84.0% 0.040 13)",
+          "oklch(95.0% 0.040 13)"
+        ]
+      },
+      "maroon-tint": {
+        "role": "secondary",
+        "displayName": "Maroon Tint",
+        "canonical": "#F4E9EA",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 11)",
+          "oklch(26.0% 0.012 11)",
+          "oklch(38.0% 0.012 11)",
+          "oklch(49.0% 0.012 11)",
+          "oklch(61.0% 0.012 11)",
+          "oklch(72.0% 0.012 11)",
+          "oklch(84.0% 0.012 11)",
+          "oklch(95.0% 0.012 11)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#FAFAF9",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 0)",
+          "oklch(26.0% 0.001 0)",
+          "oklch(38.0% 0.001 0)",
+          "oklch(49.0% 0.001 0)",
+          "oklch(61.0% 0.001 0)",
+          "oklch(72.0% 0.001 0)",
+          "oklch(84.0% 0.001 0)",
+          "oklch(95.0% 0.001 0)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0)",
+          "oklch(26.0% 0.000 0)",
+          "oklch(38.0% 0.000 0)",
+          "oklch(49.0% 0.000 0)",
+          "oklch(61.0% 0.000 0)",
+          "oklch(72.0% 0.000 0)",
+          "oklch(84.0% 0.000 0)",
+          "oklch(95.0% 0.000 0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#18181B",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 286)",
+          "oklch(26.0% 0.006 286)",
+          "oklch(38.0% 0.006 286)",
+          "oklch(49.0% 0.006 286)",
+          "oklch(61.0% 0.006 286)",
+          "oklch(72.0% 0.006 286)",
+          "oklch(84.0% 0.006 286)",
+          "oklch(95.0% 0.006 286)"
+        ]
+      },
+      "ink-body": {
+        "role": "neutral",
+        "displayName": "Ink Body",
+        "canonical": "#3F3F46",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 286)",
+          "oklch(26.0% 0.012 286)",
+          "oklch(38.0% 0.012 286)",
+          "oklch(49.0% 0.012 286)",
+          "oklch(61.0% 0.012 286)",
+          "oklch(72.0% 0.012 286)",
+          "oklch(84.0% 0.012 286)",
+          "oklch(95.0% 0.012 286)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#52525B",
+        "tonalRamp": [
+          "oklch(15.0% 0.015 286)",
+          "oklch(26.0% 0.015 286)",
+          "oklch(38.0% 0.015 286)",
+          "oklch(49.0% 0.015 286)",
+          "oklch(61.0% 0.015 286)",
+          "oklch(72.0% 0.015 286)",
+          "oklch(84.0% 0.015 286)",
+          "oklch(95.0% 0.015 286)"
+        ]
+      },
+      "subtle": {
+        "role": "neutral",
+        "displayName": "Subtle",
+        "canonical": "#71717A",
+        "tonalRamp": [
+          "oklch(15.0% 0.014 286)",
+          "oklch(26.0% 0.014 286)",
+          "oklch(38.0% 0.014 286)",
+          "oklch(49.0% 0.014 286)",
+          "oklch(61.0% 0.014 286)",
+          "oklch(72.0% 0.014 286)",
+          "oklch(84.0% 0.014 286)",
+          "oklch(95.0% 0.014 286)"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "canonical": "#E4E4E7",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 286)",
+          "oklch(26.0% 0.004 286)",
+          "oklch(38.0% 0.004 286)",
+          "oklch(49.0% 0.004 286)",
+          "oklch(61.0% 0.004 286)",
+          "oklch(72.0% 0.004 286)",
+          "oklch(84.0% 0.004 286)",
+          "oklch(95.0% 0.004 286)"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#EDEDEC",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 0)",
+          "oklch(26.0% 0.001 0)",
+          "oklch(38.0% 0.001 0)",
+          "oklch(49.0% 0.001 0)",
+          "oklch(61.0% 0.001 0)",
+          "oklch(72.0% 0.001 0)",
+          "oklch(84.0% 0.001 0)",
+          "oklch(95.0% 0.001 0)"
+        ]
+      },
+      "on-petrol": {
+        "role": "neutral",
+        "displayName": "On Petrol",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0)",
+          "oklch(26.0% 0.000 0)",
+          "oklch(38.0% 0.000 0)",
+          "oklch(49.0% 0.000 0)",
+          "oklch(61.0% 0.000 0)",
+          "oklch(72.0% 0.000 0)",
+          "oklch(84.0% 0.000 0)",
+          "oklch(95.0% 0.000 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero headline and case-study titles."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings on the homepage and inside case studies."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project tile names and case-study subheadings."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "The muted sentence under a display heading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Tech tags only."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "hover",
+        "value": "150ms ease",
+        "purpose": "Border, background, and text colour changes on hover; removed under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "640px"
+      },
+      {
+        "name": "toc",
+        "value": "800px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one filled action in a view; \"See projects\" in the hero.",
+      "html": "<a class=\"ds-btn ds-btn--primary\" href=\"#\">See projects</a>",
+      "css": ".ds-btn { display: inline-block; padding: 10px 18px; border: 1px solid var(--border, #E4E4E7); border-radius: 8px; background: var(--surface, #FFFFFF); color: var(--text, #18181B); font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: border-color 150ms ease, background-color 150ms ease; } .ds-btn:hover { border-color: var(--muted, #52525B); } .ds-btn:focus-visible { outline: 2px solid var(--primary, #1D5F7A); outline-offset: 2px; } .ds-btn--primary { border-color: var(--primary, #1D5F7A); background: var(--primary, #1D5F7A); color: var(--on-primary, #FFFFFF); } .ds-btn--primary:hover { border-color: var(--primary-dark, #174C62); background: var(--primary-dark, #174C62); }"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Outlined button for outbound links such as GitHub.",
+      "html": "<a class=\"ds-btn\" href=\"#\">GitHub</a>",
+      "css": ".ds-btn { display: inline-block; padding: 10px 18px; border: 1px solid var(--border, #E4E4E7); border-radius: 8px; background: var(--surface, #FFFFFF); color: var(--text, #18181B); font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; transition: border-color 150ms ease, background-color 150ms ease; } .ds-btn:hover { border-color: var(--muted, #52525B); } .ds-btn:focus-visible { outline: 2px solid var(--primary, #1D5F7A); outline-offset: 2px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "Wordmark with a maroon dot and three muted text links; wraps on narrow screens.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">carol<span class=\"ds-brand-dot\">.</span></a><ul class=\"ds-nav-links\"><li><a href=\"#\">Projects</a></li><li><a href=\"#\">About</a></li><li><a href=\"#\">GitHub ↗</a></li></ul></nav>",
+      "css": ".ds-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 24px 0; font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; } .ds-brand { color: var(--text, #18181B); font-size: 18px; font-weight: 700; letter-spacing: -0.02em; text-decoration: none; } .ds-brand-dot { color: var(--secondary, #6E2230); } .ds-nav-links { display: flex; gap: 20px; margin: 0; padding: 0; list-style: none; font-size: 15px; } .ds-nav-links a { color: var(--muted, #52525B); text-decoration: none; transition: color 150ms ease; } .ds-nav-links a:hover { color: var(--text, #18181B); } .ds-nav a:focus-visible { outline: 2px solid var(--primary, #1D5F7A); outline-offset: 2px; }"
+    },
+    {
+      "name": "Tech Tags",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Plain mono text listing a project's technologies; the only mono type on the site.",
+      "html": "<ul class=\"ds-tags\"><li>Python</li><li>Claude Agent SDK</li><li>RAG</li><li>Evals</li></ul>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0; padding: 0; list-style: none; color: var(--primary-dark, #174C62); font-family: \"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }"
+    },
+    {
+      "name": "Featured Project Tile",
+      "kind": "card",
+      "refersTo": "tile-featured",
+      "description": "The first project: a full-width petrol-tinted tile with diagram, title, summary, and tags.",
+      "html": "<a class=\"ds-tile ds-tile--featured\" href=\"#\"><div class=\"ds-diagram\"><span class=\"ds-node\">Student question</span><span class=\"ds-step\"><span class=\"ds-edge\">→</span><span class=\"ds-node ds-node--primary\">Agent</span></span><span class=\"ds-step\"><span class=\"ds-edge\">⇄</span><span class=\"ds-node\">Knowledge base</span></span><span class=\"ds-step\"><span class=\"ds-edge\">→</span><span class=\"ds-node ds-node--secondary\">Evals</span></span></div><h3 class=\"ds-tile-title\">office-hours <span class=\"ds-arrow\">→</span></h3><p class=\"ds-tile-summary\">Student-support agent grounded in a program knowledge base</p><ul class=\"ds-tags\"><li>Python</li><li>RAG</li><li>Evals</li></ul></a>",
+      "css": ".ds-tile { display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid var(--hairline, #EDEDEC); border-radius: 12px; background: var(--surface, #FFFFFF); color: var(--text-body, #3F3F46); text-decoration: none; font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; transition: border-color 150ms ease; } .ds-tile:hover { border-color: var(--primary, #1D5F7A); } .ds-tile:focus-visible { outline: 2px solid var(--primary, #1D5F7A); outline-offset: 2px; } .ds-tile--featured { border-color: var(--primary-tint, #E6F0F3); background: var(--primary-tint, #E6F0F3); } .ds-tile-title { margin: 0; color: var(--text, #18181B); font-size: 17px; font-weight: 600; line-height: 1.25; } .ds-arrow { color: var(--secondary, #6E2230); } .ds-tile-summary { margin: 0; color: var(--muted, #52525B); font-size: 15px; } .ds-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; } .ds-step { display: inline-flex; align-items: center; gap: 8px; } .ds-edge { color: var(--secondary, #6E2230); font-size: 14px; } .ds-node { padding: 6px 10px; border: 1.5px solid var(--primary, #1D5F7A); border-radius: 8px; background: var(--surface, #FFFFFF); color: var(--primary, #1D5F7A); font-size: 13px; font-weight: 500; line-height: 1.3; } .ds-node--primary { background: var(--primary, #1D5F7A); color: var(--on-primary, #FFFFFF); } .ds-node--secondary { border-color: var(--secondary, #6E2230); color: var(--secondary, #6E2230); } .ds-tags { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 0; padding: 0; list-style: none; color: var(--primary-dark, #174C62); font-family: \"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }"
+    },
+    {
+      "name": "Architecture Diagram",
+      "kind": "custom",
+      "refersTo": "node",
+      "description": "Three or four labelled boxes joined by maroon arrows, generated from project front matter.",
+      "html": "<div class=\"ds-diagram\"><span class=\"ds-node\">Student question</span><span class=\"ds-step\"><span class=\"ds-edge\">→</span><span class=\"ds-node ds-node--primary\">Agent</span></span><span class=\"ds-step\"><span class=\"ds-edge\">⇄</span><span class=\"ds-node\">Knowledge base</span></span><span class=\"ds-step\"><span class=\"ds-edge\">→</span><span class=\"ds-node ds-node--secondary\">Evals</span></span></div>",
+      "css": ".ds-diagram { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; } .ds-step { display: inline-flex; align-items: center; gap: 8px; } .ds-edge { color: var(--secondary, #6E2230); font-size: 14px; } .ds-node { padding: 6px 10px; border: 1.5px solid var(--primary, #1D5F7A); border-radius: 8px; background: var(--surface, #FFFFFF); color: var(--primary, #1D5F7A); font-size: 13px; font-weight: 500; line-height: 1.3; } .ds-node--primary { background: var(--primary, #1D5F7A); color: var(--on-primary, #FFFFFF); } .ds-node--secondary { border-color: var(--secondary, #6E2230); color: var(--secondary, #6E2230); }"
+    },
+    {
+      "name": "Key Decision Note",
+      "kind": "custom",
+      "refersTo": "decision",
+      "description": "Maroon-tinted callout marking the choices that mattered most in a case study.",
+      "html": "<aside class=\"ds-decision\"><strong>Key decision:</strong> Keep all domain logic in a framework-free package, and enforce it in CI.</aside>",
+      "css": ".ds-decision { display: block; padding: 16px 20px; border-left: 3px solid var(--secondary, #6E2230); border-radius: 0 8px 8px 0; background: var(--secondary-tint, #F4E9EA); color: var(--text-body, #3F3F46); font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; font-size: 16px; line-height: 1.6; } .ds-decision strong:first-child { color: var(--text, #18181B); }"
+    },
+    {
+      "name": "Fact Tiles",
+      "kind": "card",
+      "refersTo": "fact",
+      "description": "Borderless tinted tiles alternating petrol and maroon, each a value over a label.",
+      "html": "<ul class=\"ds-facts\"><li class=\"ds-fact ds-fact--primary\"><span class=\"ds-fact-value\">5 years</span><span class=\"ds-fact-label\">building production software</span></li><li class=\"ds-fact ds-fact--secondary\"><span class=\"ds-fact-value\">4 languages</span><span class=\"ds-fact-label\">Python, Java, Go, JavaScript</span></li></ul>",
+      "css": ".ds-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; font-family: \"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif; } .ds-fact { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 12px; } .ds-fact--primary { background: var(--primary-tint, #E6F0F3); } .ds-fact--secondary { background: var(--secondary-tint, #F4E9EA); } .ds-fact-value { color: var(--text, #18181B); font-size: 20px; font-weight: 600; letter-spacing: -0.02em; } .ds-fact-label { color: var(--muted, #52525B); font-size: 14px; line-height: 1.45; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Annotated Schematic",
+    "overview": "The site reads like a clean technical drawing with notes in the margin. Each project is introduced by a small architecture diagram, three or four labelled boxes joined by arrows, and the reasoning behind the work is set apart in maroon \"Key decision\" notes. Petrol blue draws the structure; maroon marks the annotation. Everything else is ink on off-white paper.\n\nThe feel is light and unfussy. Surfaces are flat, tints are soft, and space does the separating that borders and shadows would do elsewhere. A narrow single column (760px on the homepage, 960px on case studies) keeps the page calm and quick to skim. The system was built to replace a dark, aqua, card-heavy theme that looked generic, and it deliberately avoids every one of those traits.",
+    "keyCharacteristics": [
+      "Light mode only, on warm off-white paper.",
+      "Two accents with fixed jobs: petrol for structure and action, maroon for annotation and emphasis.",
+      "Flat: no shadows and no gradients anywhere.",
+      "Diagrams built from HTML boxes stand in for screenshots.",
+      "One sans family for everything; mono appears only on tech tags.",
+      "Sentence-case headings at readable sizes; no all-caps labels."
+    ],
+    "rules": [
+      {
+        "name": "The Two Pens Rule",
+        "body": "Petrol draws structure and invites action; maroon annotates. Maroon is never used for a button or a link, and petrol is never used for a callout.",
+        "section": "colors"
+      },
+      {
+        "name": "The Token-Only Rule",
+        "body": "Every colour is a CSS variable on `:root` in `assets/css/site.css`. No raw colour values appear outside that block; a test enforces it.",
+        "section": "colors"
+      },
+      {
+        "name": "The 4.5:1 Rule",
+        "body": "Every text colour meets 4.5:1 contrast on every background it sits on. `tests/tokens.test.mjs` checks each pair.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono-for-Tags Rule",
+        "body": "Mono type appears only on tech tags, never below 12px. Inline code in case studies uses the body font at weight 500.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence-Case Rule",
+        "body": "No uppercase labels and no tiny eyebrow text. Headings are sentence case at 17px or larger.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "Nothing lifts. Hover is shown by a border or background colour change over 150ms, never by movement or shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Solid-Colour Rule",
+        "body": "No gradients. Every fill is one flat colour.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every colour from the `:root` variables in `assets/css/site.css`.",
+      "Do keep petrol for structure and action, and maroon for annotation.",
+      "Do show a project with a 3–4 node diagram generated from data.",
+      "Do separate content with space, hairlines, and tints.",
+      "Do keep headings sentence case at 17px or larger.",
+      "Do keep hover changes to border or background colour over 150ms, and remove transitions under `prefers-reduced-motion`.",
+      "Do keep every text and background pair at 4.5:1 or better.",
+      "Do check any new layout at 375px and 1280px for horizontal overflow."
+    ],
+    "donts": [
+      "Don't use gradients; fills are solid.",
+      "Don't add shadows.",
+      "Don't use tiny all-caps labels.",
+      "Don't use mono type for anything except tech tags, or set it below 12px.",
+      "Don't use orange, bright aqua, or teal.",
+      "Don't build boxes-everywhere card layouts; rows and whitespace come first, and tiles are reserved for projects and facts.",
+      "Don't add screenshots of projects.",
+      "Don't add a dark theme without adding a full second set of variables."
+    ]
+  }
+}
