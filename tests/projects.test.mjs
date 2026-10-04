@@ -17,8 +17,8 @@ test('tiles are ordered by weight; only the tile-only project is compact', () =>
 
 test('every tile shows its summary', () => {
   const t = tiles();
-  assert.match(t[0].querySelector('.tile-summary').text, /AI agent that answers student questions/);
-  assert.match(t[1].querySelector('.tile-summary').text, /Full-stack workout tracker, in progress/);
+  assert.match(t[0].querySelector('.tile-summary').text, /AI agent that answers students/);
+  assert.match(t[1].querySelector('.tile-summary').text, /Full-stack workout tracker for use at the gym/);
   assert.match(t[2].querySelector('.tile-summary').text, /A portfolio built with Hugo/);
 });
 
@@ -113,8 +113,8 @@ test('each tile link is named by its title, described by its summary', () => {
   }
   // A case-study tile is described by its summary and its key decision; its status joins its name.
   const described = (tile) => tile.getAttribute('aria-describedby').split(' ').map((x) => doc.getElementById(x).text.trim()).join(' | ');
-  assert.match(described(tiles()[0]), /AI agent that answers student questions.* \| Key decision/);
-  assert.match(described(tiles()[1]), /Full-stack workout tracker, in progress.* \| Key decision/);
+  assert.match(described(tiles()[0]), /AI agent that answers students.* \| Key decision/);
+  assert.match(described(tiles()[1]), /Full-stack workout tracker for use at the gym.* \| Key decision/);
   const statusId = tiles()[1].getAttribute('aria-labelledby').split(' ')[1];
   assert.equal(doc.getElementById(statusId).text.trim(), 'In progress');
   assert.equal(tiles()[0].querySelector('.status'), null);

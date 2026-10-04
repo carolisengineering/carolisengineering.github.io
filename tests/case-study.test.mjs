@@ -21,7 +21,7 @@ test('header: back link, title, lede falls back to summary, tags, repo', () => {
   assert.equal(back.getAttribute('href'), '/#projects');
   assert.equal(back.text.trim(), '← All projects');
   assert.equal(doc.querySelector('.cs-header h1').text.trim(), 'Office Hours');
-  assert.match(doc.querySelector('.cs-header .lede').text, /^AI agent that answers student questions/);
+  assert.match(doc.querySelector('.cs-header .lede').text, /^AI agent that answers students/);
   assert.equal(doc.querySelectorAll('.cs-header .tags li').length, 6);
   const repo = doc.querySelector('.cs-header a.repo-link');
   assert.equal(repo.getAttribute('href'), 'https://github.com/carolisengineering/office-hours');

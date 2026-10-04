@@ -8,7 +8,7 @@ disableKinds = ['taxonomy', 'term', 'rss']
   homeTitle = 'Carol · Software engineer'
   # 1200x630 social preview card, generated from the homepage by `npm run og`.
   ogImage = 'og.png'
-  description = 'Carol is a software engineer with 5 years of industry experience, building backend systems, full-stack applications, and AI agents backed by evals.'
+  description = 'Carol is a software engineer with 5 years of industry experience, building backend distributed systems, full-stack web applications, and AI agents backed by evals.'
 
 [markup.tableOfContents]
   startLevel = 2

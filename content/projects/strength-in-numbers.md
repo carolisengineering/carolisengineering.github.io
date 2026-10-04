@@ -1,11 +1,11 @@
 ---
 title: Strength in Numbers
-summary: "Full-stack workout tracker, in progress: the API, sign-in, and a shared domain package are built, and workout logging is next"
+summary: "Full-stack workout tracker for use at the gym. The API, sign-in, and shared domain package are built; workout logging is next."
 tags: [TypeScript, React, Fastify, Prisma, PostgreSQL, Docker]
 repo: https://github.com/carolisengineering/strength-in-numbers
 weight: 2
 status: In progress
-decision: Keep all domain logic in a framework-free package, and enforce it in CI.
+decision: All the workout rules live in one framework-free package, enforced in CI, so the API, the web app, and a future mobile app share the same code.
 diagram:
   - { label: React SPA, next: "→" }
   - { label: Fastify API, style: primary, next: "→" }
@@ -32,7 +32,7 @@ architecture:
 Strength in Numbers is a no-frills workout tracker for gym-goers to track the exercises, weights, reps and sets performed in their workouts. It is designed to be used at the gym on a mobile device.
 
 
-## What I built
+## Features
 
 This is a TypeScript monorepo with three parts:
 
@@ -42,7 +42,7 @@ This is a TypeScript monorepo with three parts:
 
 So far the exercise catalog API, the workout session API, the app shell with sign-in, and the profile screen are specified and built. Set logging and the workout screen are next.
 
-## How it works
+## Functionality
 
 The web app talks to the API over REST with bearer tokens. Sign-in uses Auth0 with the PKCE flow, and the browser holds tokens in memory only. The API checks every token against Auth0's published keys and creates a user row on first login.
 
@@ -50,7 +50,7 @@ Every error the API returns uses one standard shape (RFC 9457 problem details), 
 
 The exercise catalog syncs to the client incrementally with a sync token. Writes are idempotent, so a retried request after a dropped connection can't create a duplicate workout. Database migrations and catalog seeding run as explicit release steps, never when the app boots.
 
-## Decisions & tradeoffs
+## Decisions & Tradeoffs
 
 {{< decision >}}Keep all domain logic in a framework-free package, and enforce it in CI. The shared package can't import React, the DOM, or Node-only APIs, so the same strength math runs in the API, in the browser, and in a future React Native app, without a rewrite.{{< /decision >}}
 
@@ -71,7 +71,7 @@ The project has no users yet, so the results are about correctness:
 - Integration tests run against a real PostgreSQL database in Testcontainers.
 - CI runs lint, type-checking, the domain-package purity check, a design-token check that stops components from hard-coding colors or sizes, and the OpenAPI drift check.
 
-## What I'd do next
+## Future Work
 
 - Finish set logging and the workout screen, the main loop the app exists for
 - Add connectivity resilience: a local copy of the in-progress workout, and a retry queue that drains when the signal comes back

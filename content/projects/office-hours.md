@@ -1,10 +1,10 @@
 ---
 title: Office Hours
-summary: AI agent that answers student questions from a program knowledge base, including evals and red-team tests
+summary: AI agent that answers students' questions from their program's documentation, with automated tests that grade its answers and try to break it
 tags: [Python, RAG, Evals, Langfuse, Red-teaming, Claude Agent SDK]
 repo: https://github.com/carolisengineering/office-hours
 weight: 1
-decision: Fixed scoring rules and re-ran evals after design review found inaccuracies
+decision: Found errors in my own scoring, fixed them, and re-ran every eval instead of keeping the old numbers
 diagram:
   - { label: Student question, next: "→" }
   - { label: Agent, style: primary, next: "⇄" }
@@ -29,13 +29,13 @@ architecture:
 
 ## Context
 
-Riverton University, a fictional school, needs a support system for students in its Data Science program. The agent must answer questions from the program's documentation. It should decline requests for irrelevant or sensitive information.
+Riverton University, a fictional school, needs a support system for students in its online M.S. in Data Science. The agent must answer questions from the program's documentation, and decline requests for irrelevant or sensitive information.
 
 ## Features
 
-Office Hours is a student-support agent for Riverton's online M.S. in Data Science. The program's knowledge base is a set of local text files, so there is a real ground truth to grade against. Data science has hard prerequisite chains, which makes for precise test cases: an invented prerequisite is an obvious failure.
+The program's knowledge base is a set of local text files, so there is a real ground truth to grade against. Data science has hard prerequisite chains, which makes for precise test cases: an invented prerequisite is an obvious failure.
 
-The agent runs on the Claude Agent SDK with Haiku 4.5 and has exactly two tools. One tool searches the knowledge base. The other returns a structured response, including the answer, the documents it cites, and whether the agent refused or escalated. Quality is confirmed by a 25-case golden dataset with known-correct answers, an automated eval harness that scores each run, a red-team suite of automated tests that try to break it, and Langfuse tracing for real-time observability.
+The agent runs on the Claude Agent SDK with Haiku 4.5 and has exactly two tools. One tool searches the knowledge base. The other returns a structured response, including the answer, the documents it cites, and whether the agent refused or escalated. Quality is measured by a 25-case golden dataset with known-correct answers, an automated eval harness that scores each run, a red-team suite of automated tests that try to break it, and Langfuse tracing for real-time observability.
 
 ## Functionality
 
@@ -45,9 +45,9 @@ The search tool has three interchangeable retrieval backends: BM25 keyword searc
 
 The eval harness runs every case five times and reports rates with 95% confidence intervals. A Sonnet judge grades grounding, refusals, and tone. The judge itself is checked against 23 hand-written labels, and agrees on 20 of them.
 
-## Decisions & tradeoffs
+## Decisions & Tradeoffs
 
-{{< decision >}}After conducting a design review during the initial development, several scoring rules were identified as incorrect. The agent could see Claude Code's built-in tools, but it couldn't call them. I fixed the scoring, added unit tests for it, removed the tools, and re-ran everything. I didn't keep any number from before the fix.{{< /decision >}}
+{{< decision >}}A design review partway through development found that several scoring rules were wrong. It also found that the agent could see Claude Code's built-in tools but couldn't call them. I fixed the scoring, added unit tests for it, removed the tools, and re-ran everything. I didn't keep any number from before the fix.{{< /decision >}}
 
 **Small agent, larger judge.** I used a small agent model and a larger model as the judge. It is harder to achieve consistent results from Haiku, and using a Sonnet judge means the grader won't share all of the agent's blind spots.
 
@@ -69,7 +69,7 @@ The retrieval comparison was clearer. Every answerable miss on BM25 was a retrie
 
 The biggest gap the evals exposed was refusals that were correct but unhelpful: the agent declined without stating the policy behind the refusal. Version 3 adds one rule: search, state the policy, and cite it. It held all 13 red-team attacks, including one that no earlier version had held, and raised adversarial pass from 31/35 to 33/35. I report all of this as directional. With five runs per case, many differences sit inside the intervals.
 
-## What I'd do next
+## Future Work
 
 - Rewrite the few-shot examples so their values and search queries don't overlap with golden-set cases. Today they leak into some answers.
 - Fix the one refusal case where the safety path wins before the agent ever searches for the policy.

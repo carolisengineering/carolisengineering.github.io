@@ -41,7 +41,7 @@ Carol solves technical problems with code and communication: an engineer who bui
 - **Light mode only (binding).** Every colour is a CSS variable so dark mode can be added later.
 - **Stack.** Hugo 0.166.0 with no theme, one stylesheet (`assets/css/site.css`), self-hosted fonts, deployed to GitHub Pages by GitHub Actions on push to `main`.
 - **Deploy gate.** CI runs the test suite with `REQUIRE_FILLED=1` and builds with `--panicOnWarning`, so any `[TODO` placeholder, missing required field, or Hugo warning blocks the deploy.
-- **Open:** recruiters are the primary audience, but the site offers no direct way to contact Carol and no resume. Whether that stays as is has not been decided.
+- **No contact section (decided 2026-10-04).** The site offers no direct way to contact Carol and no resume, and the homepage ends on Skills with no closing call to action. Carol chose to keep it that way for now.
 
 ## Brand Commitments
 

@@ -23,13 +23,13 @@
   "skills": [
     { "category": "Languages", "items": ["Python", "Java", "Go", "TypeScript", "JavaScript"] },
     { "category": "Frameworks", "items": ["Spring", "FastAPI", "Django", "Fastify"] },
-    { "category": "Libraries", "items": ["React", "asyncio", "Alembic", "Jackson", "zod"]},
+    { "category": "Libraries", "items": ["React", "asyncio", "Alembic", "Jackson", "Zod"]},
     { "category": "Testing", "items": ["JUnit", "Mockito", "pytest", "unittest", "testify"] },
     { "category": "Infrastructure", "items": ["Kubernetes", "Docker", "Azure", "AWS", "GCP"] },
     { "category": "Databases", "items": ["MongoDB", "PostgreSQL"] },
-    { "category": "Message brokers", "items": ["Azure Service Bus", "Redis", "RabbitMQ"] },
+    { "category": "Message Brokers", "items": ["Azure Service Bus", "Redis", "RabbitMQ"] },
     { "category": "Observability", "items": ["Grafana", "Prometheus", "New Relic"] },
     { "category": "CI/CD", "items": ["GitHub Actions", "Jenkins", "Harness"] },
-    { "category": "AI-assisted development", "items": ["Claude Code", "GitHub Copilot", "Cursor"] }
+    { "category": "AI-Assisted Development", "items": ["Claude Code", "GitHub Copilot", "Cursor"] }
   ]
 }
