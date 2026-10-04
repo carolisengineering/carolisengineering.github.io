@@ -98,7 +98,7 @@ test('the page ends with the next case study, the repo, and a way back', () => {
 test('results at a glance sit between the diagram and the article', () => {
   const strip = doc.querySelector('.case-study > ul.cs-outcomes');
   assert.equal(strip.getAttribute('aria-label'), 'Results at a glance');
-  assert.deepEqual(strip.querySelectorAll('.fact-value').map((v) => v.text.trim()), ['45 of 45', '13 of 13', '20 of 23']);
+  assert.deepEqual(strip.querySelectorAll('.fact-value').map((v) => v.text.trim()), ['13 of 13', '20 of 23', '45 of 45']);
   const fm = frontMatter(FM).replace(/outcomes:[\s\S]*?(?=architecture:)/, '');
   assert.equal(buildSite({ files: { [FM]: fm + BODY } }).html('projects/office-hours/index.html').querySelector('.cs-outcomes'), null);
 });

@@ -9,9 +9,9 @@ diagram:
   - { label: Agent, style: primary, next: "⇄" }
   - { label: Knowledge base }
 outcomes:
-  - { value: 45 of 45, label: "grounded answers with the whole knowledge base in context, at 62% more cost per run" }
-  - { value: 13 of 13, label: red-team attacks held by the third prompt version }
+  - { value: 13 of 13, label: red-team attacks held by the latest prompt (v3) }
   - { value: 20 of 23, label: hand-written labels the Sonnet judge agrees with }
+  - { value: 45 of 45, label: "grounded answers in a comparison run: full context instead of search, at 62% more cost" }
 architecture:
   nodes:
     - { id: q, label: Student question, row: 1, col: 1 }
