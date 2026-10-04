@@ -70,18 +70,46 @@ for (const width of [375, 1280]) {
   }
 }
 
-test('TOC highlights the section being read, and is hidden below 800px', async () => {
+test('TOC marks the section being read: first at load, the one scrolled to, last at page bottom', async () => {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   await page.goto(`${server.url}/projects/office-hours/`);
-  const id = await page.locator('.cs-article h2').nth(2).getAttribute('id');
+  const ids = await page.locator('.cs-article h2').evaluateAll((hs) => hs.map((h) => h.id));
+  const active = () => page.locator('.toc a.is-active').evaluateAll((as) => as.map((a) => [a.getAttribute('href'), a.getAttribute('aria-current')]));
+  assert.deepEqual(await active(), [['#' + ids[0], 'location']]);
   await page.evaluate((target) => {
     const h = document.getElementById(target);
     window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - 10);
-  }, id);
-  await page.waitForSelector(`.toc a.is-active[href="#${id}"]`, { timeout: 2000 });
-  assert.equal(await page.locator('.toc a.is-active').count(), 1);
-  await page.setViewportSize({ width: 700, height: 900 });
-  assert.equal(await page.locator('.toc').isVisible(), false);
+  }, ids[2]);
+  await page.waitForSelector(`.toc a.is-active[href="#${ids[2]}"]`, { timeout: 2000 });
+  assert.equal((await active()).length, 1);
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForSelector(`.toc a.is-active[href="#${ids.at(-1)}"]`, { timeout: 2000 });
+  assert.equal(await page.locator('.toc a[aria-current]').count(), 1);
+  await page.close();
+});
+
+test('below 800px the TOC is a visible row above the article with 44px targets', async () => {
+  const page = await browser.newPage({ viewport: { width: 375, height: 900 } });
+  await page.goto(`${server.url}/projects/office-hours/`);
+  assert.equal(await page.locator('.toc').isVisible(), true);
+  const [tocBottom, articleTop, heights] = await page.evaluate(() => [
+    document.querySelector('.toc').getBoundingClientRect().bottom,
+    document.querySelector('.cs-article').getBoundingClientRect().top,
+    [...document.querySelectorAll('.toc a')].map((a) => a.getBoundingClientRect().height),
+  ]);
+  assert.ok(tocBottom <= articleTop);
+  assert.ok(heights.every((h) => h >= 44), JSON.stringify(heights));
+  await page.close();
+});
+
+test('the skip link is the first tab stop and appears on focus', async () => {
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  await page.goto(server.url + '/');
+  const top = () => page.evaluate(() => document.querySelector('.skip-link').getBoundingClientRect().top);
+  assert.ok(await top() < 0);
+  await page.keyboard.press('Tab');
+  assert.equal(await page.evaluate(() => document.activeElement.getAttribute('href')), '#main');
+  assert.ok(await top() >= 0);
   await page.close();
 });
 
@@ -143,16 +171,19 @@ test('keyboard focus keeps each element\'s own corner radius', async () => {
   await page.close();
 });
 
-test('a wrapped diagram never leaves a connector at the end of a line', async () => {
-  const page = await browser.newPage({ viewport: { width: 375, height: 900 } });
-  for (const path of ['/', '/projects/strength-in-numbers/']) {
-    await page.goto(server.url + path);
-    const orphans = await page.evaluate(() => [...document.querySelectorAll('.diagram .edge')].flatMap((edge) => {
-      const node = edge.nextElementSibling;
-      const [a, b] = [edge.getBoundingClientRect(), node.getBoundingClientRect()];
-      return Math.abs((a.top + a.bottom) / 2 - (b.top + b.bottom) / 2) > 4 ? [`${edge.textContent} before ${node.textContent}`] : [];
-    }));
-    assert.deepEqual(orphans, [], path);
+test('a diagram is one row or one column, never a wrapped row', async () => {
+  for (const width of [375, 700, 1280]) {
+    const page = await browser.newPage({ viewport: { width, height: 900 } });
+    for (const path of ['/', '/projects/strength-in-numbers/', '/projects/office-hours/']) {
+      await page.goto(server.url + path);
+      const shapes = await page.evaluate(() => [...document.querySelectorAll('.diagram')].map((d) => {
+        const boxes = [...d.querySelectorAll('.node')].map((n) => n.getBoundingClientRect());
+        const row = boxes.every((b) => Math.abs(b.top - boxes[0].top) <= 4);
+        const column = boxes.every((b, k) => k === 0 || b.top >= boxes[k - 1].bottom);
+        return row ? 'row' : column ? 'column' : 'wrapped: ' + d.getAttribute('aria-label');
+      }));
+      assert.deepEqual(shapes.filter((s) => s.startsWith('wrapped')), [], path + ' at ' + width + 'px');
+    }
+    await page.close();
   }
-  await page.close();
 });

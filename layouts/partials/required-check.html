@@ -4,7 +4,7 @@
   render an empty element or a dead link.
 */ -}}
 {{- $about := hugo.Data.about -}}
-{{- range slice "headline" "headlineHighlight" "lede" "intro" "facts" "experience" "links" "skills" -}}
+{{- range slice "headline" "headlineHighlight" "lede" "facts" "experience" "links" "skills" -}}
   {{- if not (index $about .) }}{{ warnf "data/about.json is missing %s" . }}{{ end -}}
 {{- end -}}
 {{- range $list, $keys := dict

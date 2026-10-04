@@ -48,7 +48,7 @@ Carol solves technical problems with code and communication: an engineer who bui
 - Name: Carol; site title `carolisengineering`.
 - Favicon: a "c." mark.
 - Voice: first person, plain, specific. States what was built and why, without superlatives.
-- Visual rules Carol made binding in the redesign spec: no tiny all-caps labels; mono type only for tech tags, at 12px or larger; solid colours only, no gradients; no orange and no bright aqua or teal; no boxes-everywhere card layouts.
+- Visual rules Carol made binding in the redesign spec: no tiny all-caps labels; no mono type (changed 2026-10-03; the spec originally allowed it on tech tags); solid colours only, no gradients; no orange and no bright aqua or teal; no boxes-everywhere card layouts.
 
 ## Evidence on Hand
 
@@ -56,7 +56,7 @@ Carol solves technical problems with code and communication: an engineer who bui
 - `content/projects/office-hours.md`: full case study of a student-support agent on the Claude Agent SDK, with eval and red-team results.
 - `content/projects/strength-in-numbers.md`: full case study of a workout-tracking web app. The app itself is in progress (set logging and the workout screen are not built) and has no users yet, so its results are about correctness, not usage.
 - `content/projects/this-site.md`: tile only, links to the repo.
-- `static/og-placeholder.png` is a placeholder social card, not a finished asset.
+- `static/og.png` is the social card, generated from the homepage by `npm run og`.
 - Absent, and not to be fabricated: employer names, testimonials, metrics beyond those in the files above, a photo, a resume.
 
 ## Product Principles

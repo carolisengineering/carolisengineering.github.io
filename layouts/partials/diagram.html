@@ -28,10 +28,19 @@
   {{- if eq $i 0 }}
   {{ partial "inline/diagram-node.html" $node }}
   {{- else }}
-  <span class="step"><span class="edge" aria-hidden="true">{{ (index $nodes (sub $i 1)).next }}</span>{{ partial "inline/diagram-node.html" $node }}</span>
+  <span class="step">{{ partial "inline/diagram-edge.html" (index $nodes (sub $i 1)).next }}{{ partial "inline/diagram-node.html" $node }}</span>
   {{- end }}
   {{- end }}
 </div>
+
+{{- /* Connectors are drawn, not typed, so every arrow has the same weight. "⇄" is two-way; anything else points forward. */ -}}
+{{- define "partials/inline/diagram-edge.html" -}}
+{{- if eq . "⇄" -}}
+<svg class="edge edge--both" viewBox="0 0 20 10" aria-hidden="true"><path d="M2 5h16M6 1.5 2 5l4 3.5M14 1.5 18 5l-4 3.5"/></svg>
+{{- else -}}
+<svg class="edge" viewBox="0 0 20 10" aria-hidden="true"><path d="M1 5h17M14 1.5 18 5l-4 3.5"/></svg>
+{{- end -}}
+{{- end -}}
 
 {{- define "partials/inline/diagram-node.html" -}}
 <span class="node{{ with .style }} node--{{ . }}{{ end }}">{{ .label }}</span>

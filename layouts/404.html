@@ -1,6 +1,12 @@
 {{ define "main" }}
 <section class="container not-found">
   <h1>Page not found</h1>
-  <p><a href="{{ "/" | relURL }}">← Back home</a></p>
+  <p class="lede">There is nothing at this address. The projects are all here:</p>
+  <ul class="not-found-links">
+    {{- range (where site.RegularPages "Section" "projects").ByWeight }}
+    <li><a href="{{ .RelPermalink | default .Params.repo }}">{{ .Title }}</a>{{ with .Params.summary }} <span>{{ . }}</span>{{ end }}</li>
+    {{- end }}
+  </ul>
+  <p><a class="back-link" href="{{ "/" | relURL }}">← Back home</a></p>
 </section>
 {{ end }}

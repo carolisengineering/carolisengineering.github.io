@@ -14,7 +14,15 @@ Personal portfolio site, built with [Hugo](https://gohugo.io/) (no theme) and de
 | `tests/`, `scripts/` | Build tests, browser checks, and the screenshot script |
 | `docs/` | Design spec and implementation plan for the redesign |
 
-A project without a case study sets `build: { render: never, list: always }`, which gives it a tile that links to its repo and no page of its own.
+A project without a case study sets `build: { render: never, list: always }`, which gives it a compact row that links to its repo and no page of its own.
+
+Project front matter drives three things beyond the title, summary, tags and repo:
+
+- `diagram`: the short chain of 3–4 boxes on the homepage tile. Each node has a `label`, an optional `style` (`primary` or `secondary`), and a `next` connector (`"→"` or `"⇄"`) on every node except the last.
+- `architecture`: the fuller diagram at the top of the case study. `nodes` each take an `id`, `label`, `row` and `col`, plus optional `note`, `style` and `span`; `edges` join two neighbouring nodes with `from`, `to`, and an optional `label` or `both: true`. Without it, the case study shows the `diagram` chain.
+- `decision`: one sentence shown as the "Key decision" line on the tile.
+- `outcomes`: up to three `{ value, label }` results shown as tiles under the case-study diagram.
+- `status`: an optional short state such as "In progress", shown as a small label beside the title on the tile and the case study.
 
 ## Prerequisites
 
@@ -35,6 +43,7 @@ hugo server -D         # also renders drafts
 ```bash
 npm test                  # every test: build output, links, contrast, TOC, overflow at 375px and 1280px
 node --test tests/home.test.mjs   # one file
+npm run og                # regenerate static/og.png, the social preview card, from the homepage
 npm run screenshots       # full-page PNGs of home, a case study, and 404 at 375px and 1280px → screenshots/
 ```
 

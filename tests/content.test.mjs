@@ -6,7 +6,7 @@ const about = readAbout();
 
 test('about.json has the spec shape and no employer, avatar, or title fields', () => {
   for (const key of ['avatar', 'title', 'bio', 'company']) assert.ok(!(key in about), `unexpected key ${key}`);
-  for (const key of ['name', 'headline', 'headlineHighlight', 'lede', 'intro', 'facts', 'experience', 'links', 'skills']) {
+  for (const key of ['name', 'headline', 'headlineHighlight', 'lede', 'facts', 'experience', 'links', 'skills']) {
     assert.ok(key in about, `missing key ${key}`);
   }
   for (const entry of about.experience) {
@@ -78,7 +78,6 @@ for (const [label, change, message] of [
   ['headline', ({ headline, ...a }) => a, /about\.json is missing headline/],
   ['headlineHighlight', (a) => ({ ...a, headlineHighlight: '' }), /about\.json is missing headlineHighlight/],
   ['lede', ({ lede, ...a }) => a, /about\.json is missing lede/],
-  ['intro', ({ intro, ...a }) => a, /about\.json is missing intro/],
   ['links', (a) => ({ ...a, links: [] }), /about\.json is missing links/],
   ['facts', (a) => ({ ...a, facts: [] }), /about\.json is missing facts/],
   ['skills', (a) => ({ ...a, skills: [] }), /about\.json is missing skills/],

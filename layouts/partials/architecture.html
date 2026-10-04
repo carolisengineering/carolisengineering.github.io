@@ -1,0 +1,62 @@
+{{- /*
+  Case-study architecture diagram from front matter: nodes on a small grid, labelled edges between neighbours.
+  Every element carries two placements (--wide and --tall), so a narrow container transposes the grid
+  instead of shrinking it. Warns on malformed data so --panicOnWarning blocks a deploy.
+*/ -}}
+{{- $name := .name -}}
+{{- $nodes := .arch.nodes | default slice -}}
+{{- $edges := .arch.edges | default slice -}}
+{{- $byId := dict -}}
+{{- range $node := $nodes -}}
+  {{- if not (and .id .label .row .col) -}}
+    {{- warnf "architecture for %s: every node needs id, label, row and col" $name -}}
+  {{- end -}}
+  {{- with .style -}}
+    {{- if not (in (slice "primary" "secondary") .) -}}
+      {{- warnf "architecture for %s: unknown style %q on node %q" $name . $node.label -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $byId = merge $byId (dict (string .id) .) -}}
+{{- end -}}
+{{- $alt := slice -}}
+{{- range $edges -}}
+  {{- $from := index $byId (string .from) -}}
+  {{- $to := index $byId (string .to) -}}
+  {{- if not (and $from $to) -}}
+    {{- warnf "architecture for %s: edge %v to %v names a node that does not exist" $name .from .to -}}
+  {{- else -}}
+    {{- $via := "" -}}
+    {{- with .label }}{{ $via = printf " (%s)" . }}{{ end -}}
+    {{- $alt = $alt | append (printf "%s %s %s%s" $from.label (cond (default false .both) "to and from" "to") $to.label $via) -}}
+  {{- end -}}
+{{- end -}}
+{{- range $node := $nodes -}}
+  {{- with $node.note }}{{ $alt = $alt | append (printf "%s: %s" $node.label .) }}{{ end -}}
+{{- end -}}
+<div class="arch" role="img" aria-label="{{ delimit $alt "; " }}">
+  {{- range $nodes }}
+  {{- $span := sub (mul 2 (.span | default 1)) 1 }}
+  {{- $row := sub (mul 2 .row) 1 }}
+  {{- $col := sub (mul 2 .col) 1 }}
+  <span class="node arch-node{{ with .style }} node--{{ . }}{{ end }}" style="{{ printf "--wide: %d / %d / auto / span %d; --tall: %d / %d / span %d / auto" $row $col $span $col $row $span | safeCSS }}">{{ .label }}{{ with .note }}<span class="arch-note">{{ . }}</span>{{ end }}</span>
+  {{- end }}
+  {{- range $edges }}
+  {{- $from := index $byId (string .from) }}
+  {{- $to := index $byId (string .to) }}
+  {{- if and $from $to }}
+  {{- $along := eq $from.row $to.row }}
+  {{- $rev := cond $along (lt $to.col $from.col) (lt $to.row $from.row) }}
+  {{- $row := 0 }}
+  {{- $col := 0 }}
+  {{- if $along }}
+    {{- $row = sub (mul 2 $from.row) 1 }}
+    {{- $col = mul 2 (cond $rev $to.col $from.col) }}
+  {{- else }}
+    {{- $row = mul 2 (cond $rev $to.row $from.row) }}
+    {{- /* A cross edge sits in the column of whichever end does not span. */ -}}
+    {{- $col = sub (mul 2 (cond (gt ($from.span | default 1) 1) $to.col $from.col)) 1 }}
+  {{- end }}
+  <span class="arch-edge arch-edge--{{ cond $along "along" "cross" }}{{ if $rev }} arch-edge--rev{{ end }}{{ if .both }} arch-edge--both{{ end }}" style="{{ printf "--wide: %d / %d; --tall: %d / %d" $row $col $col $row | safeCSS }}" aria-hidden="true">{{ with .label }}<span class="arch-label">{{ . }}</span>{{ end }}<span class="arch-line"><span class="arch-head arch-head--start"></span><span class="arch-shaft"></span><span class="arch-head arch-head--end"></span></span></span>
+  {{- end }}
+  {{- end }}
+</div>

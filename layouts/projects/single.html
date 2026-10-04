@@ -2,7 +2,7 @@
 <article class="container case-study">
   <header class="cs-header">
     <p><a class="back-link" href="{{ "/#projects" | relURL }}">← All projects</a></p>
-    <h1>{{ .Title }}</h1>
+    <h1>{{ .Title }}{{ with .Params.status }} <span class="status">{{ . }}</span>{{ end }}</h1>
     <p class="lede">{{ .Params.lede | default .Params.summary }}</p>
     {{- with .Params.tags }}
     <ul class="tags" aria-label="Tech">
@@ -12,37 +12,79 @@
     </ul>
     {{- end }}
     {{- with .Params.repo }}
-    <p><a class="repo-link" href="{{ . }}" rel="noopener">Repo ↗</a></p>
+    <p><a class="repo-link" href="{{ . }}" rel="noopener">Repo <span aria-hidden="true">↗</span></a></p>
     {{- end }}
   </header>
 
   <div class="cs-hero panel--primary">
+    {{- with .Params.architecture }}
+    {{ partial "architecture.html" (dict "arch" . "name" $.Title) }}
+    {{- else }}
     {{ partial "diagram.html" (dict "nodes" .Params.diagram "size" "large" "name" .Title) }}
+    {{- end }}
   </div>
+
+  {{- with .Params.outcomes }}
+  <ul class="facts cs-outcomes" aria-label="Results at a glance">
+    {{- range . }}
+    <li class="fact">
+      <span class="fact-value">{{ .value }}</span>
+      <span class="fact-label">{{ .label }}</span>
+    </li>
+    {{- end }}
+  </ul>
+  {{- end }}
 
   <div class="cs-body">
     <div class="toc">{{ replace .TableOfContents `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="On this page">` | safeHTML }}</div>
-    <div class="cs-article">{{ .Content }}</div>
+    <div class="cs-main">
+      <div class="cs-article">{{ .Content }}</div>
+      {{- /* The next case study by weight, wrapping round; omitted when this is the only one. */ -}}
+      {{- $studies := slice }}
+      {{- range (where site.RegularPages "Section" "projects").ByWeight }}{{ if .RelPermalink }}{{ $studies = $studies | append . }}{{ end }}{{ end }}
+      {{- $next := false }}
+      {{- range $i, $p := $studies }}{{ if eq $p.RelPermalink $.RelPermalink }}{{ $next = index $studies (mod (add $i 1) (len $studies)) }}{{ end }}{{ end }}
+      <nav class="cs-end" aria-label="More">
+        {{- if and $next (ne $next.RelPermalink .RelPermalink) }}
+        <a class="cs-next" href="{{ $next.RelPermalink }}">Next project: {{ $next.Title }} <span class="arrow" aria-hidden="true">→</span></a>
+        {{- end }}
+        <ul class="cs-end-links">
+          {{- with .Params.repo }}
+          <li><a class="repo-link" href="{{ . }}" rel="noopener">Repo <span aria-hidden="true">↗</span></a></li>
+          {{- end }}
+          <li><a class="back-link" href="{{ "/#projects" | relURL }}">← All projects</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </article>
 <script>
   (() => {
-    const links = new Map();
-    document.querySelectorAll('.toc a[href^="#"]').forEach((a) => {
-      links.set(decodeURIComponent(a.getAttribute('href').slice(1)), a);
-    });
-    if (!links.size || !('IntersectionObserver' in window)) return;
-    const setActive = (id) => links.forEach((a, key) => a.classList.toggle('is-active', key === id));
-    // A heading becomes active once it enters the top 30% of the viewport.
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter((e) => e.isIntersecting)
-        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-      if (visible.length) setActive(visible[0].target.id);
-    }, { rootMargin: '0px 0px -70% 0px' });
-    links.forEach((_, id) => {
-      const heading = document.getElementById(id);
-      if (heading) observer.observe(heading);
-    });
+    const items = [...document.querySelectorAll('.toc a[href^="#"]')]
+      .map((a) => [a, document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)))])
+      .filter(([, heading]) => heading);
+    if (!items.length) return;
+    // The section being read is the last heading above a line 30% down the viewport:
+    // the first section until then, and the last one once the page is scrolled to the bottom.
+    const update = () => {
+      const line = window.innerHeight * 0.3;
+      let active = items[0];
+      for (const item of items) if (item[1].getBoundingClientRect().top <= line) active = item;
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) active = items[items.length - 1];
+      for (const [a] of items) {
+        const on = a === active[0];
+        a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      }
+    };
+    let queued = false;
+    window.addEventListener('scroll', () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; update(); });
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
 </script>
 {{ end }}

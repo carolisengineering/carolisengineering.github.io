@@ -3,10 +3,10 @@
   <nav class="container nav" aria-label="Main">
     <a class="brand" href="{{ "/" | relURL }}">{{ lower $about.name }}<span class="brand-dot">.</span></a>
     <ul class="nav-links">
-      <li><a href="{{ "/#projects" | relURL }}">Projects</a></li>
       <li><a href="{{ "/#about" | relURL }}">About</a></li>
+      <li><a href="{{ "/#projects" | relURL }}">Projects</a></li>
       {{- range first 1 $about.links }}
-      <li><a href="{{ .url }}" rel="noopener">{{ .label }} ↗</a></li>
+      <li><a href="{{ .url }}" rel="noopener">{{ .label }} <span aria-hidden="true">↗</span></a></li>
       {{- end }}
     </ul>
   </nav>

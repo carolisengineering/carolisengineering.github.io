@@ -1,22 +1,38 @@
 ---
-title: strength-in-numbers
-summary: A mobile-first workout logging and progress tracking web app
+title: Strength in Numbers
+summary: "Full-stack workout tracker, in progress: the API, sign-in, and a shared domain package are built, and workout logging is next"
 tags: [TypeScript, React, Fastify, Prisma, PostgreSQL, Docker]
 repo: https://github.com/carolisengineering/strength-in-numbers
-weight: 1
+weight: 2
+status: In progress
+decision: Keep all domain logic in a framework-free package, and enforce it in CI.
 diagram:
   - { label: React SPA, next: "→" }
   - { label: Fastify API, style: primary, next: "→" }
-  - { label: Domain core, next: "→" }
   - { label: PostgreSQL, style: secondary }
+outcomes:
+  - { value: 90%, label: "line-coverage floor on auth, the user repository, and the web API client" }
+  - { value: 5 checks, label: "run in CI: lint, types, domain-package purity, design tokens, and API contract drift" }
+  - { value: No users yet, label: so the results so far are about correctness }
+architecture:
+  nodes:
+    - { id: spa, label: React SPA, row: 1, col: 1 }
+    - { id: api, label: Fastify API, style: primary, row: 1, col: 2 }
+    - { id: db, label: PostgreSQL, style: secondary, row: 1, col: 3 }
+    - { id: core, label: Shared domain package, note: "types, validation, strength math", row: 2, col: 1, span: 2 }
+  edges:
+    - { from: spa, to: api, label: REST }
+    - { from: api, to: db, label: Prisma }
+    - { from: spa, to: core, label: imports }
+    - { from: api, to: core, label: imports }
 ---
 
 ## Context
 
-Strength in Numbers is a no-frills workout tracker for gym goers to track the exercises, weights, reps and sets performed in their workouts. It is designed to be used at the gym on a mobile device.
+Strength in Numbers is a no-frills workout tracker for gym-goers to track the exercises, weights, reps and sets performed in their workouts. It is designed to be used at the gym on a mobile device.
 
 
-## Features
+## What I built
 
 This is a TypeScript monorepo with three parts:
 
@@ -34,17 +50,17 @@ Every error the API returns uses one standard shape (RFC 9457 problem details), 
 
 The exercise catalog syncs to the client incrementally with a sync token. Writes are idempotent, so a retried request after a dropped connection can't create a duplicate workout. Database migrations and catalog seeding run as explicit release steps, never when the app boots.
 
-## Decisions & Tradeoffs
+## Decisions & tradeoffs
 
 {{< decision >}}Keep all domain logic in a framework-free package, and enforce it in CI. The shared package can't import React, the DOM, or Node-only APIs, so the same strength math runs in the API, in the browser, and in a future React Native app, without a rewrite.{{< /decision >}}
 
-I chose a client-only React app over Next.js. The whole app sits behind sign-in, so server rendering would add a server tier and concepts that buy nothing here and don't carry over to a mobile client.
+**Client-only React, not Next.js.** I chose a client-only React app over Next.js. The whole app sits behind sign-in, so server rendering would add a server tier and concepts that buy nothing here and don't carry over to a mobile client.
 
-I chose Node and TypeScript for the API even though my earlier backend work was in Go. With one language across the stack, the domain rules are written and tested once instead of twice.
+**One language across the stack.** I chose Node and TypeScript for the API even though my earlier backend work was in Go. With one language across the stack, the domain rules are written and tested once instead of twice.
 
-Migrations are expand-only: a release never drops or renames a column that the running code still reads. That costs an extra release for some changes, but deploys never need downtime.
+**Expand-only migrations.** Migrations are expand-only: a release never drops or renames a column that the running code still reads. That costs an extra release for some changes, but deploys never need downtime.
 
-Every piece of work starts as a written spec with the same twelve sections, and each feature is split into an API spec and a UI spec, API first. The process is proportional to a one-person project, but it means every decision has a written reason.
+**A written spec for every piece of work.** Every piece of work starts as a written spec with the same twelve sections, and each feature is split into an API spec and a UI spec, API first. The process is proportional to a one-person project, but it means every decision has a written reason.
 
 ## Results
 

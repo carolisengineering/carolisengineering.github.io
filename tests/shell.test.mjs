@@ -26,8 +26,8 @@ test('nav has the brand, section links, and GitHub', () => {
   assert.equal(nav.querySelector('.brand-dot').text, '.');
   const links = nav.querySelectorAll('.nav-links a').map((a) => [a.text.trim(), a.getAttribute('href')]);
   assert.deepEqual(links, [
-    ['Projects', '/#projects'],
     ['About', '/#about'],
+    ['Projects', '/#projects'],
     ['GitHub ↗', 'https://github.com/carolisengineering'],
   ]);
 });
@@ -48,9 +48,7 @@ test('favicon and self-hosted fonts are published with their licenses', () => {
     'fonts/inter-latin-500-normal.woff2',
     'fonts/inter-latin-600-normal.woff2',
     'fonts/inter-latin-700-normal.woff2',
-    'fonts/jetbrains-mono-latin-400-normal.woff2',
     'fonts/Inter-OFL.txt',
-    'fonts/JetBrainsMono-OFL.txt',
   ]) {
     assert.ok(site.exists(file), file);
   }
@@ -75,6 +73,19 @@ test('404 page has a heading and a link home', () => {
   const doc = site.html('404.html');
   assert.equal(doc.querySelector('main h1').text.trim(), 'Page not found');
   assert.ok(doc.querySelector('main a[href="/"]'));
+  assert.deepEqual(doc.querySelectorAll('.not-found-links a').map((l) => l.getAttribute('href')), [
+    '/projects/office-hours/',
+    '/projects/strength-in-numbers/',
+    'https://github.com/carolisengineering/carolisengineering.github.io',
+  ]);
+});
+
+test('every page starts with a skip link to main', () => {
+  for (const page of ['index.html', '404.html', 'projects/office-hours/index.html']) {
+    const doc = site.html(page);
+    assert.equal(doc.querySelector('body > a.skip-link').getAttribute('href'), '#main');
+    assert.ok(doc.querySelector('main#main'));
+  }
 });
 
 test('no theme or old stylesheet leftovers', () => {

@@ -19,15 +19,6 @@
     </div>
   </section>
 
-  <section id="projects" class="section" aria-labelledby="projects-title">
-    <h2 id="projects-title">Projects</h2>
-    <div class="tiles">
-      {{- range $i, $p := (where site.RegularPages "Section" "projects").ByWeight }}
-      {{ partial "project-tile.html" (dict "page" $p "index" $i) }}
-      {{- end }}
-    </div>
-  </section>
-
   <section id="about" class="section" aria-labelledby="about-title">
     <h2 id="about-title">About</h2>
     {{- with $about.intro }}
@@ -35,14 +26,23 @@
     {{- end }}
     {{- with $about.facts }}
     <ul class="facts">
-      {{- range $i, $f := . }}
-      <li class="fact {{ cond (modBool $i 2) "fact--primary" "fact--secondary" }}">
+      {{- range $f := . }}
+      <li class="fact">
         <span class="fact-value">{{ $f.value }}</span>
         <span class="fact-label">{{ $f.label }}</span>
       </li>
       {{- end }}
     </ul>
     {{- end }}
+  </section>
+
+  <section id="projects" class="section" aria-labelledby="projects-title">
+    <h2 id="projects-title">Projects</h2>
+    <div class="tiles">
+      {{- range (where site.RegularPages "Section" "projects").ByWeight }}
+      {{ partial "project-tile.html" (dict "page" .) }}
+      {{- end }}
+    </div>
   </section>
 
   {{- with $about.experience }}
@@ -69,7 +69,7 @@
       {{- range . }}
       <div class="skill-row">
         <dt>{{ .category }}</dt>
-        <dd>{{ delimit .items ", " }}</dd>
+        <dd>{{ range $i, $item := .items }}{{ if $i }}<span class="sep"> · </span>{{ end }}{{ $item }}{{ end }}</dd>
       </div>
       {{- end }}
     </dl>

@@ -41,6 +41,7 @@ const PAIRS = [
   ['primary-dark', 'surface'], ['primary-dark', 'primary-tint'],
   ['secondary', 'bg'], ['secondary', 'surface'], ['secondary', 'primary-tint'], ['secondary', 'secondary-tint'],
   ['on-primary', 'primary'], ['on-primary', 'primary-dark'],
+  ['surface', 'secondary'],
 ];
 
 for (const [fg, bg] of PAIRS) {

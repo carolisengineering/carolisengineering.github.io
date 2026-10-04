@@ -30,12 +30,10 @@ test('hero buttons: See projects, then one per link (Email appears when added)',
   assert.deepEqual(buttons(email).at(-1), ['Email', 'mailto:hi@example.com']);
 });
 
-test('facts render every entry with alternating tints', () => {
-  const kinds = (d) => d.querySelectorAll('#about .facts > li.fact')
-    .map((li) => (li.classList.contains('fact--primary') ? 'p' : li.classList.contains('fact--secondary') ? 's' : '?'));
-  assert.deepEqual(kinds(doc), about.facts.map((_, i) => (i % 2 === 0 ? 'p' : 's')));
+test('facts render every entry, in order, with one tint', () => {
+  assert.equal(doc.querySelectorAll('#about .facts > li.fact').length, about.facts.length);
+  assert.equal(doc.querySelector('.fact--secondary'), null);
   const five = withAbout((a) => ({ ...a, facts: [1, 2, 3, 4, 5].map((n) => ({ value: `v${n}`, label: `l${n}` })) }));
-  assert.deepEqual(kinds(five), ['p', 's', 'p', 's', 'p']);
   assert.deepEqual(five.querySelectorAll('.fact-value').map((v) => v.text.trim()), ['v1', 'v2', 'v3', 'v4', 'v5']);
   assert.equal(squash(doc.querySelectorAll('.fact-label')[1].text), about.facts[1].label);
 });
@@ -75,11 +73,11 @@ test('skills render as a definition list in data order', () => {
   assert.deepEqual(rows.map((dt) => dt.text.trim()), about.skills.map((s) => s.category));
   assert.deepEqual(
     doc.querySelectorAll('#skills dl.skills dd').map((dd) => dd.text.trim()),
-    about.skills.map((s) => s.items.join(', ')),
+    about.skills.map((s) => s.items.join(' · ')),
   );
 });
 
 test('section headings are sentence case and in order', () => {
-  assert.deepEqual(doc.querySelectorAll('main h2').map((h) => h.text.trim()), ['Projects', 'About', 'Experience', 'Skills']);
+  assert.deepEqual(doc.querySelectorAll('main h2').map((h) => h.text.trim()), ['About', 'Projects', 'Experience', 'Skills']);
   assert.equal(doc.querySelectorAll('main h1').length, 1);
 });

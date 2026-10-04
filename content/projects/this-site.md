@@ -1,6 +1,6 @@
 ---
-title: carolisengineering.github.io
-summary: "This site: a portfolio built with Hugo and deployed to GitHub Pages by GitHub Actions"
+title: This site
+summary: A portfolio built with Hugo and deployed to GitHub Pages by GitHub Actions
 tags: [Hugo, GitHub Actions]
 repo: https://github.com/carolisengineering/carolisengineering.github.io
 weight: 3
