@@ -8,8 +8,8 @@
   {{- $description := .Params.summary | default site.Params.description }}
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
-  <link rel="preload" href="{{ "fonts/inter-latin-400-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="{{ "fonts/inter-latin-700-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ "fonts/ibm-plex-sans-latin-400-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ "fonts/ibm-plex-sans-latin-700-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
   <meta property="og:site_name" content="{{ site.Title }}">
   <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
   <meta property="og:title" content="{{ if .IsHome }}{{ site.Params.homeTitle | default site.Title }}{{ else }}{{ .Title }}{{ end }}">

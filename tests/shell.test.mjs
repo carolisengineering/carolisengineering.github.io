@@ -44,11 +44,11 @@ test('favicon and self-hosted fonts are published with their licenses', () => {
   assert.ok(site.html('index.html').querySelector('link[rel="icon"][href="/favicon.svg"]'));
   for (const file of [
     'favicon.svg',
-    'fonts/inter-latin-400-normal.woff2',
-    'fonts/inter-latin-500-normal.woff2',
-    'fonts/inter-latin-600-normal.woff2',
-    'fonts/inter-latin-700-normal.woff2',
-    'fonts/Inter-OFL.txt',
+    'fonts/ibm-plex-sans-latin-400-normal.woff2',
+    'fonts/ibm-plex-sans-latin-500-normal.woff2',
+    'fonts/ibm-plex-sans-latin-600-normal.woff2',
+    'fonts/ibm-plex-sans-latin-700-normal.woff2',
+    'fonts/IBMPlexSans-OFL.txt',
   ]) {
     assert.ok(site.exists(file), file);
   }

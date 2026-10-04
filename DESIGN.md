@@ -18,34 +18,34 @@ colors:
   on-petrol: "#FFFFFF"
 typography:
   display:
-    fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontFamily: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "40px"
     fontWeight: 700
     lineHeight: 1.15
     letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontFamily: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "24px"
     fontWeight: 600
     lineHeight: 1.25
     letterSpacing: "-0.02em"
   title:
-    fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontFamily: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "17px"
     fontWeight: 600
     lineHeight: 1.25
   lede:
-    fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontFamily: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.6
   body:
-    fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontFamily: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "16px"
     fontWeight: 400
     lineHeight: 1.6
   label:
-    fontFamily: "Inter, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    fontFamily: "'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif"
     fontSize: "13px"
     fontWeight: 500
     lineHeight: 1.6
@@ -163,7 +163,7 @@ A cool petrol blue and a warm maroon on neutral zinc greys, each accent with a p
 
 ## Typography
 
-**Display and Body Font:** Inter (with system-ui, -apple-system, Segoe UI, sans-serif), self-hosted in weights 400, 500, 600, and 700.
+**Display and Body Font:** IBM Plex Sans (with system-ui, -apple-system, Segoe UI, sans-serif), self-hosted in weights 400, 500, 600, and 700. Carol chose it on 2026-10-04 to replace Inter, which read as a generic default: Plex's engineered, slightly condensed forms suit the technical-drawing look.
 
 Sizes are written in `rem` in the stylesheet, so the scale follows the visitor's default text size; the pixel values here assume the usual 16px default.
 
@@ -174,11 +174,11 @@ Sizes are written in `rem` in the stylesheet, so the scale follows the visitor's
 - **Headline** (600, 24px, 1.25, -0.02em): section headings on the homepage and inside case studies.
 - **Title** (600, 17px, 1.25): project tile names and case-study subheadings. Fact values use the same weight at 20px.
 - **Lede** (400, 17px, 1.6): the sentence under a display heading, in muted grey, capped at 60ch.
-- **Body** (400, 16px, 1.6): running text. Case-study prose is capped at 56ch, which sets about 70 characters to a line in Inter (`ch` is the width of "0", wider than the average letter). Headings use balanced wrapping. Secondary text steps down to 15px and 14px.
+- **Body** (400, 16px, 1.6): running text. Case-study prose is capped at 56ch, which sets about 72 characters to a line in IBM Plex Sans (`ch` is the width of "0", wider than the average letter). Headings use balanced wrapping. Secondary text steps down to 15px and 14px.
 - **Label** (500, 13px, Petrol Dark): tech tags.
 
 ### Named Rules
-**The One-Family Rule.** Inter sets everything, including tech tags and inline code. There is no mono face: it read as a costume, not as information. Inline code in case studies uses the body font at weight 500.
+**The One-Family Rule.** IBM Plex Sans sets everything, including tech tags and inline code. There is no mono face: it read as a costume, not as information. Inline code in case studies uses the body font at weight 500.
 
 **The Title-Case Rule.** Headings and Skills categories are title case, and headings are 17px or larger. No all-caps labels and no tiny eyebrow text.
 

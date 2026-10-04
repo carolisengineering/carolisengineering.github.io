@@ -64,7 +64,7 @@ for (const width of [375, 1280]) {
       assert.deepEqual(await page.evaluate(contrastAudit), []);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       assert.ok(overflow <= 0, `scrolls horizontally by ${overflow}px`);
-      assert.ok(await page.evaluate(() => document.fonts.check('16px Inter')));
+      assert.ok(await page.evaluate(() => document.fonts.check('16px "IBM Plex Sans"')));
       await page.close();
     });
   }
