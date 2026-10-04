@@ -184,7 +184,7 @@ Sizes are written in `rem` in the stylesheet, so the scale follows the visitor's
 
 ## Layout
 
-A single centred column with 20px side gutters: 760px wide on the homepage, 960px on case-study pages. The homepage runs hero, About, Projects, Experience, Skills. Sections are stacked with 64px above each, and the hero sits 48px below the nav. The footer follows an 80px gap and a hairline rule.
+A single centred column with 20px side gutters: 760px wide on the homepage, 960px on case-study pages. The homepage runs hero, About, Projects, Experience, Skills; Experience is hidden while `showExperience` is `false` in `data/about.json`. Sections are stacked with 64px above each, and the hero sits 48px below the nav. The footer follows an 80px gap and a hairline rule.
 
 Project tiles sit in a two-column grid with a 16px gap; a project without a case study spans both columns as a compact row. Fact tiles auto-fit at a 160px minimum. The experience timeline and skills list are two-column rows, a fixed label column (120px and 160px) beside the content. Case studies place a 180px sticky table of contents beside the article with a 64px gap.
 

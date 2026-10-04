@@ -41,6 +41,7 @@ test('facts render every entry, in order, with one tint', () => {
 test('experience timeline shows years, role · industry, and summary', () => {
   const two = withAbout((a) => ({
     ...a,
+    showExperience: true,
     experience: [
       { start: '2022', end: 'now', role: 'Software Engineer', industry: 'EdTech', summary: 'Built things.' },
       { start: '2019', end: '2022', role: 'Developer', industry: 'Logistics', summary: 'Shipped things.' },
@@ -60,9 +61,17 @@ test('an empty experience list hides the Experience section', () => {
   assert.equal(none.querySelector('.timeline'), null);
 });
 
+test('showExperience false hides the section; true or missing shows it', () => {
+  const off = withAbout((a) => ({ ...a, showExperience: false }));
+  assert.equal(off.querySelector('#experience'), null);
+  assert.ok(withAbout((a) => ({ ...a, showExperience: true })).querySelector('#experience .timeline'));
+  assert.ok(withAbout(({ showExperience, ...a }) => a).querySelector('#experience .timeline'));
+});
+
 test('a stray company field is never rendered', () => {
   const leaked = withAbout((a) => ({
     ...a,
+    showExperience: true,
     experience: a.experience.map((e) => ({ ...e, company: 'Acme Employer Inc' })),
   }));
   assert.doesNotMatch(leaked.toString(), /Acme Employer Inc/);
@@ -78,6 +87,6 @@ test('skills render as a definition list in data order', () => {
 });
 
 test('section headings are sentence case and in order', () => {
-  assert.deepEqual(doc.querySelectorAll('main h2').map((h) => h.text.trim()), ['About', 'Projects', 'Experience', 'Skills']);
+  assert.deepEqual(doc.querySelectorAll('main h2').map((h) => h.text.trim()), ['About', 'Projects', ...(about.showExperience === false ? [] : ['Experience']), 'Skills']);
   assert.equal(doc.querySelectorAll('main h1').length, 1);
 });

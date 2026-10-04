@@ -30,7 +30,7 @@ Carol solves technical problems with code and communication: an engineer who bui
 ## Operating Context
 
 - Visitors arrive from a GitHub profile, an application, or a link Carol sends. A recruiter is likely to open it alongside many other candidates' profiles.
-- The homepage carries the hero, an about section with fact tiles, an anonymous experience timeline, skills by category, and project tiles. Featured projects open a case-study page; smaller ones link straight to their GitHub repo.
+- The homepage carries the hero, an about section with fact tiles, an anonymous experience timeline (hidden while `showExperience` is `false` in `data/about.json`), skills by category, and project tiles. Featured projects open a case-study page; smaller ones link straight to their GitHub repo.
 - Content is edited in two places: `data/about.json` for everything that is not a project, and one Markdown file per project in `content/projects/`.
 
 ## Capabilities and Constraints

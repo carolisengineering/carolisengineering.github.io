@@ -8,9 +8,13 @@
     { "value": "5 languages", "label": "Python · Java · Go · TypeScript · JavaScript" },
     { "value": "3 clouds", "label": "AWS · Azure · GCP" }
   ],
+  "showExperience": false,
   "experience": [
-    { "start": "2023", "end": "now", "role": "Advanced Software Engineer", "industry": "Legal", "summary": "Own a distributed pipeline processing sensitive data" },
-    { "start": "2021", "end": "2023", "role": "Software Engineer", "industry": "Communications", "summary": "Built and maintained custom billing and inventory systems" }
+    { "start": "2026", "end": "now", "role": "Senior Software Engineer", "industry": "Legal", "summary": "Own a distributed pipeline, processing sensitive data, end to end" },
+    { "start": "2023", "end": "2026", "role": "Advanced Software Engineer", "industry": "Legal", "summary": "Automated manual release processes, saving time and reducing errors" },
+    { "start": "2022", "end": "2023", "role": "Software Engineer", "industry": "Communications", "summary": "Built and maintained custom billing and inventory systems" },
+    { "start": "2021", "end": "2022", "role": "Junior Software Engineer", "industry": "Communications", "summary": "Wrote and published team's first onboarding documentation" }
+
 
   ],
   "links": [

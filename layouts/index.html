@@ -45,6 +45,7 @@
     </div>
   </section>
 
+  {{- if ne $about.showExperience false }}
   {{- with $about.experience }}
   <section id="experience" class="section" aria-labelledby="experience-title">
     <h2 id="experience-title">Experience</h2>
@@ -60,6 +61,7 @@
       {{- end }}
     </ol>
   </section>
+  {{- end }}
   {{- end }}
 
   {{- with $about.skills }}
