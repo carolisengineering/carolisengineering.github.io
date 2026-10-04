@@ -1,0 +1,25 @@
+{{- /*
+  Called with the home page: walks about.json and every project's front matter.
+  Calls itself with (dict "value" … "walkPath" …) to recurse. Each string containing
+  "[TODO" becomes one warning, so `--panicOnWarning` blocks a deploy with placeholders.
+*/ -}}
+{{- if and (reflect.IsMap .) (isset . "walkPath") -}}
+  {{- $v := .value -}}
+  {{- $path := .walkPath -}}
+  {{- if reflect.IsMap $v -}}
+    {{- range $k, $x := $v -}}
+      {{- partial "placeholder-check.html" (dict "value" $x "walkPath" (printf "%s.%s" $path $k)) -}}
+    {{- end -}}
+  {{- else if reflect.IsSlice $v -}}
+    {{- range $i, $x := $v -}}
+      {{- partial "placeholder-check.html" (dict "value" $x "walkPath" (printf "%s[%d]" $path $i)) -}}
+    {{- end -}}
+  {{- else if and (eq (printf "%T" $v) "string") (strings.Contains $v "[TODO") -}}
+    {{- warnf "placeholder not filled: %s = %q" $path $v -}}
+  {{- end -}}
+{{- else -}}
+  {{- partial "placeholder-check.html" (dict "value" hugo.Data.about "walkPath" "data/about.json") -}}
+  {{- range where site.RegularPages "Section" "projects" -}}
+    {{- partial "placeholder-check.html" (dict "value" .Params "walkPath" .File.Path) -}}
+  {{- end -}}
+{{- end -}}

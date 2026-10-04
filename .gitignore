@@ -1,1 +1,9 @@
 .DS_Store
+.superpowers/
+.impeccable/
+.impeccable/design.json
+public/
+resources/
+.hugo_build.lock
+node_modules/
+screenshots/

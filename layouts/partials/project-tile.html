@@ -1,0 +1,26 @@
+{{- $p := .page -}}
+{{- /* A project with a case study gets a full tile; one without links to its repo from a compact row. */ -}}
+{{- $href := $p.RelPermalink -}}
+{{- $arrow := "→" -}}
+{{- $compact := not $href -}}
+{{- if $compact -}}
+  {{- $href = $p.Params.repo -}}
+  {{- $arrow = "↗" -}}
+{{- end -}}
+{{- $id := printf "tile-%s" (urlize $p.File.ContentBaseName) -}}
+<a class="tile{{ if $compact }} tile--compact{{ end }}" href="{{ $href }}"{{ if $compact }} rel="noopener"{{ end }} aria-labelledby="{{ $id }}-name{{ if $p.Params.status }} {{ $id }}-status{{ end }}{{ if $compact }} {{ $id }}-external{{ end }}"{{ if $p.Params.summary }} aria-describedby="{{ $id }}-summary"{{ end }}>
+  <div class="tile-diagram{{ if not $compact }} panel--primary{{ end }}">
+    {{ partial "diagram.html" (dict "nodes" $p.Params.diagram "size" "compact" "name" $p.Title) }}
+  </div>
+  <h3 class="tile-title"><span class="tile-name" id="{{ $id }}-name">{{ $p.Title }}</span> <span class="arrow" aria-hidden="true">{{ $arrow }}</span>{{ with $p.Params.status }} <span class="status" id="{{ $id }}-status">{{ . }}</span>{{ end }}{{ if $compact }}<span class="visually-hidden" id="{{ $id }}-external">(opens on GitHub)</span>{{ end }}</h3>
+  {{- with $p.Params.summary }}
+  <p class="tile-summary" id="{{ $id }}-summary">{{ . }}</p>
+  {{- end }}
+  {{- with $p.Params.tags }}
+  <ul class="tags" aria-label="Tech">
+    {{- range . }}
+    <li>{{ . }}</li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</a>
