@@ -111,10 +111,10 @@ test('each tile link is named by its title, described by its summary', () => {
     assert.equal(Boolean(externalId), tile.classList.contains('tile--compact'));
     if (externalId) assert.equal(doc.getElementById(externalId).text.trim(), '(opens on GitHub)');
   }
-  // A case-study tile is described by its summary and its key decision; its status joins its name.
+  // A tile is described by its summary alone; the key decision stays in the case study. Its status joins its name.
   const described = (tile) => tile.getAttribute('aria-describedby').split(' ').map((x) => doc.getElementById(x).text.trim()).join(' | ');
-  assert.match(described(tiles()[0]), /AI agent that answers students.* \| Key decision/);
-  assert.match(described(tiles()[1]), /Full-stack workout tracker for use at the gym.* \| Key decision/);
+  assert.match(described(tiles()[0]), /^AI agent that answers students[^|]*$/);
+  assert.match(described(tiles()[1]), /^Full-stack workout tracker for use at the gym[^|]*$/);
   const statusId = tiles()[1].getAttribute('aria-labelledby').split(' ')[1];
   assert.equal(doc.getElementById(statusId).text.trim(), 'In progress');
   assert.equal(tiles()[0].querySelector('.status'), null);

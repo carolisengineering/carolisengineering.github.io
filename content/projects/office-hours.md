@@ -4,7 +4,6 @@ summary: AI agent that answers students' questions from their program's document
 tags: [Python, RAG, Evals, Langfuse, Red-teaming, Claude Agent SDK]
 repo: https://github.com/carolisengineering/office-hours
 weight: 1
-decision: Found errors in my own scoring, fixed them, and re-ran every eval instead of keeping the old numbers
 diagram:
   - { label: Student question, next: "→" }
   - { label: Agent, style: primary, next: "⇄" }

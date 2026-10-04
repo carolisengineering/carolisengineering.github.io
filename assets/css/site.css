@@ -115,8 +115,6 @@ main:focus { outline: none; }
 .tile-summary { color: var(--muted); font-size: 0.9375rem; }
 /* Tags sit on the bottom edge, so they line up across tiles of different lengths. */
 .tile > .tags { margin-top: auto; }
-.tile-decision { font-size: 0.875rem; line-height: 1.5; }
-.tile-decision-label { margin-right: 4px; color: var(--secondary); font-weight: 600; }
 
 /* Tech tags: a dot-separated list in the body font, set apart by colour and weight. */
 .tags { display: flex; flex-wrap: wrap; gap: 2px 6px; margin: 0; padding: 0; list-style: none; color: var(--primary-dark); font-size: 0.8125rem; font-weight: 500; }

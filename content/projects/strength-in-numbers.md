@@ -5,7 +5,6 @@ tags: [TypeScript, React, Fastify, Prisma, PostgreSQL, Docker]
 repo: https://github.com/carolisengineering/strength-in-numbers
 weight: 2
 status: In progress
-decision: All the workout rules live in one framework-free package, enforced in CI, so the API, the web app, and a future mobile app share the same code.
 diagram:
   - { label: React SPA, next: "→" }
   - { label: Fastify API, style: primary, next: "→" }

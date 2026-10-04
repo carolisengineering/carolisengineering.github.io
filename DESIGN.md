@@ -129,7 +129,7 @@ The feel is light and unfussy. Surfaces are flat, tints are soft, and space does
 - Flat: no shadows and no gradients anywhere.
 - Diagrams built from HTML boxes stand in for screenshots.
 - One sans family for everything; there is no mono face.
-- Sentence-case headings at readable sizes; no all-caps labels.
+- Title-case headings at readable sizes; no all-caps labels.
 
 ## Colors
 
@@ -180,7 +180,7 @@ Sizes are written in `rem` in the stylesheet, so the scale follows the visitor's
 ### Named Rules
 **The One-Family Rule.** Inter sets everything, including tech tags and inline code. There is no mono face: it read as a costume, not as information. Inline code in case studies uses the body font at weight 500.
 
-**The Sentence-Case Rule.** No uppercase labels and no tiny eyebrow text. Headings are sentence case at 17px or larger.
+**The Title-Case Rule.** Headings and Skills categories are title case, and headings are 17px or larger. No all-caps labels and no tiny eyebrow text.
 
 ## Layout
 
@@ -241,7 +241,7 @@ Light and unfussy: soft tints, thin lines, and generous space, with nothing that
 A row of three or four labelled boxes joined by maroon arrows, generated from project front matter. Nodes are white with a 1.5px petrol outline and petrol text. One node per diagram is filled petrol to mark the centre of the system, and the final node may take a maroon outline. Arrows are drawn as small SVG strokes, not typed glyphs, so one-way and two-way connectors share one weight. A diagram is always one row or one column: when its container is too narrow for a row (520px for compact, 720px for large) it stacks with the arrows pointing down. The compact size (13px) sits in tiles. A case study without an architecture diagram falls back to the large size (15px, centred) on its Petrol Tint panel.
 
 ### Key decision note (signature)
-A Maroon Tint block (8px corners) with a small maroon "Key decision" label sitting on its top edge, like a tag on a drawing: white 13px semibold text on a fully rounded maroon pill. There is no side stripe. It marks the one choice in a case study that mattered most. The same decision appears as one line on the project's homepage tile, introduced by "Key decision" in maroon semibold.
+A Maroon Tint block (8px corners) with a small maroon "Key decision" label sitting on its top edge, like a tag on a drawing: white 13px semibold text on a fully rounded maroon pill. There is no side stripe. It marks the one choice in a case study that mattered most. It appears only in the case study; homepage tiles stay to diagram, title, summary, and tags.
 
 ### Architecture diagram (signature)
 The diagram at the top of a case study. Up to about six nodes sit on a small grid, joined by thin maroon connectors that can carry a one-word label ("REST", "search"). Nodes may carry a second, lighter line. Connectors are drawn with borders, so they stretch to fit. Below 720px of container width the grid transposes, rows becoming columns, so the diagram stays legible on a phone instead of shrinking. Tiles keep the short three-box chain.
@@ -277,7 +277,7 @@ A petrol button reading "Skip to content", off screen until it receives keyboard
 - **Do** keep petrol for structure and action, and maroon for annotation.
 - **Do** show a project with a 3–4 node diagram generated from data.
 - **Do** separate content with space, hairlines, and tints.
-- **Do** keep headings sentence case at 17px or larger.
+- **Do** keep headings title case at 17px or larger.
 - **Do** keep hover changes to border or background colour over 150ms, and remove transitions under `prefers-reduced-motion`.
 - **Do** keep every text and background pair at 4.5:1 or better.
 - **Do** check any new layout at 375px and 1280px for horizontal overflow.

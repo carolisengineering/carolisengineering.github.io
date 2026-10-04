@@ -86,7 +86,7 @@ test('skills render as a definition list in data order', () => {
   );
 });
 
-test('section headings are sentence case and in order', () => {
+test('section headings are title case and in order', () => {
   assert.deepEqual(doc.querySelectorAll('main h2').map((h) => h.text.trim()), ['About', 'Projects', ...(about.showExperience === false ? [] : ['Experience']), 'Skills']);
   assert.equal(doc.querySelectorAll('main h1').length, 1);
 });

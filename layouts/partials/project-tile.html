@@ -8,7 +8,7 @@
   {{- $arrow = "↗" -}}
 {{- end -}}
 {{- $id := printf "tile-%s" (urlize $p.File.ContentBaseName) -}}
-<a class="tile{{ if $compact }} tile--compact{{ end }}" href="{{ $href }}"{{ if $compact }} rel="noopener"{{ end }} aria-labelledby="{{ $id }}-name{{ if $p.Params.status }} {{ $id }}-status{{ end }}{{ if $compact }} {{ $id }}-external{{ end }}"{{ if $p.Params.summary }} aria-describedby="{{ $id }}-summary{{ if and (not $compact) $p.Params.decision }} {{ $id }}-decision{{ end }}"{{ end }}>
+<a class="tile{{ if $compact }} tile--compact{{ end }}" href="{{ $href }}"{{ if $compact }} rel="noopener"{{ end }} aria-labelledby="{{ $id }}-name{{ if $p.Params.status }} {{ $id }}-status{{ end }}{{ if $compact }} {{ $id }}-external{{ end }}"{{ if $p.Params.summary }} aria-describedby="{{ $id }}-summary"{{ end }}>
   <div class="tile-diagram{{ if not $compact }} panel--primary{{ end }}">
     {{ partial "diagram.html" (dict "nodes" $p.Params.diagram "size" "compact" "name" $p.Title) }}
   </div>
@@ -16,9 +16,6 @@
   {{- with $p.Params.summary }}
   <p class="tile-summary" id="{{ $id }}-summary">{{ . }}</p>
   {{- end }}
-  {{- if not $compact }}{{ with $p.Params.decision }}
-  <p class="tile-decision" id="{{ $id }}-decision"><span class="tile-decision-label">Key decision</span> {{ . }}</p>
-  {{- end }}{{ end }}
   {{- with $p.Params.tags }}
   <ul class="tags" aria-label="Tech">
     {{- range . }}
