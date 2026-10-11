@@ -1,18 +1,17 @@
 ---
 title: Strength in Numbers
-summary: "Full-stack workout tracker for use at the gym. The API, sign-in, and shared domain package are built; workout logging is next."
+summary: "Full-stack workout tracker for use at the gym. Logging a workout works end to end, including offline, with history, progress charts, and personal records on top."
 tags: [TypeScript, React, Fastify, Prisma, PostgreSQL, Docker]
 repo: https://github.com/carolisengineering/strength-in-numbers
 weight: 2
-status: In progress
 diagram:
   - { label: React SPA, next: "→" }
   - { label: Fastify API, style: primary, next: "→" }
   - { label: PostgreSQL, style: secondary }
 outcomes:
-  - { value: 90%, label: "line-coverage floor on auth, the user repository, and the web API client" }
-  - { value: 5 checks, label: "run in CI: lint, types, domain-package purity, design tokens, and API contract drift" }
-  - { value: No users yet, label: so the results so far are about correctness }
+  - { value: 90%, label: "line-coverage floor on auth, rate limiting, the API client, and the offline outbox" }
+  - { value: 6 CI jobs, label: "covering lint, types, purity, design tokens, contract drift, a Docker build, integration, and two post-deploy smokes" }
+  - { value: 10 sessions, label: "of personal-record and progress math reconciled by hand against the live finish and rebuild paths" }
 architecture:
   nodes:
     - { id: spa, label: React SPA, row: 1, col: 1 }
@@ -39,7 +38,7 @@ This is a TypeScript monorepo with three parts:
 - **A shared domain package** holding the types, validation schemas, unit conversion, and strength math, written once and used everywhere
 - **A React single-page app** built with Vite and designed for a phone browser first
 
-So far the exercise catalog API, the workout session API, the app shell with sign-in, and the profile screen are specified and built. Set logging and the workout screen are next.
+The core loop is complete: pick exercises, log sets, finish the workout. On top of that sit a history list, per-exercise progress charts drawn as hand-written SVG with no chart library, and a personal-record engine that tracks four record types per exercise.
 
 ## Functionality
 
@@ -47,7 +46,7 @@ The web app talks to the API over REST with bearer tokens. Sign-in uses Auth0 wi
 
 Every error the API returns uses one standard shape (RFC 9457 problem details), and the web client turns those into typed errors. Request and response types come from shared Zod schemas, which also generate the OpenAPI document; CI fails if the published contract drifts from the code.
 
-The exercise catalog syncs to the client incrementally with a sync token. Writes are idempotent, so a retried request after a dropped connection can't create a duplicate workout. Database migrations and catalog seeding run as explicit release steps, never when the app boots.
+The exercise catalog syncs to the client incrementally with a sync token. Set writes go through a persisted outbox keyed on a client-generated ID, so a set logged in a dead spot survives a reload and syncs when the signal returns, and a retry can't create a duplicate. Finishing a workout recomputes personal records inside the same transaction and returns any new records to the client. History pages with a keyset cursor, so the list stays stable while new workouts land. Routines are saved as a whole and copied into a workout when it starts, targets and superset groups included, so editing or deleting a routine later never rewrites past workouts. Database migrations, catalog seeding, and record rebuilds run as explicit release steps, never when the app boots.
 
 ## Decisions & Tradeoffs
 
@@ -63,16 +62,17 @@ The exercise catalog syncs to the client incrementally with a sync token. Writes
 
 ## Results
 
-The project has no users yet, so the results are about correctness:
+The first milestone, logging a full workout from a phone, is reached. The second, history and progress, is code-complete, and the API for the third, routines and supersets, is merged. The results so far are about correctness:
 
 - Every behavioral acceptance criterion in a spec has at least one test that names it, so the spec and the test suite can be checked against each other.
-- The auth plugin and the user repository must stay at or above 90% line coverage. So must the web app's API client and auth code.
-- Integration tests run against a real PostgreSQL database in Testcontainers.
-- CI runs lint, type-checking, the domain-package purity check, a design-token check that stops components from hard-coding colors or sizes, and the OpenAPI drift check.
+- The auth plugin, rate limiter, and user repository must stay at or above 90% line coverage. So must the web app's API client, auth code, workout features, and offline outbox.
+- The personal-record math is checked two ways: a seeded property test proves it matches a brute-force version, and a ten-session fixture reconciled by hand runs through the live finish and rebuild paths. The same fixture also checks the progress-chart series against hand-worked values.
+- Integration tests run against a real PostgreSQL database in Testcontainers, and a browser smoke test runs the happy path against staging after every deploy.
+- CI also runs lint, type-checking, the domain-package purity check, a design-token check that stops components from hard-coding colors or sizes, and the OpenAPI drift check.
 
 ## Future Work
 
-- Finish set logging and the workout screen, the main loop the app exists for
-- Add connectivity resilience: a local copy of the in-progress workout, and a retry queue that drains when the signal comes back
-- Build history, progress charts, and the personal-record engine
+- A week of real gym sessions from a phone, which decides what the offline work still needs: draft rows, multi-tab safety, a logout guard for unsaved sets
+- The routines and supersets UI (the API is done), so a planned workout can be started in one tap
+- Account export and deletion, and production observability with traces and alerts
 - Move hosting from Render to AWS with infrastructure as code, as its own project
