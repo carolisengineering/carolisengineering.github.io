@@ -124,16 +124,9 @@ test('each tile link is named by its title, described by its summary', () => {
   assert.match(described(tiles()[0]), /^AI agent that answers students[^|]*$/);
   assert.match(described(tiles()[1]), /^Full-stack workout tracker for use at the gym[^|]*$/);
   assert.match(described(tiles()[2]), /^Two-player couch co-op game[^|]*$/);
-  // Only Strength in Numbers sets a status; its badge is part of the tile's accessible name.
+  // No project currently sets a status, so no tile carries a badge in its accessible name.
   for (const tile of tiles()) {
-    const status = tile.querySelector('.status');
-    const named = tile.getAttribute('aria-labelledby').includes('-status');
-    if (name(tile) === 'Strength in Numbers') {
-      assert.equal(status.text.trim(), 'In progress');
-      assert.ok(named);
-    } else {
-      assert.equal(status, null);
-      assert.ok(!named);
-    }
+    assert.equal(tile.querySelector('.status'), null);
+    assert.ok(!tile.getAttribute('aria-labelledby').includes('-status'));
   }
 });

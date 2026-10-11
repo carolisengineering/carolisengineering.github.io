@@ -4,7 +4,6 @@ summary: "Full-stack workout tracker for use at the gym. Logging a workout works
 tags: [TypeScript, React, Fastify, Prisma, PostgreSQL, Docker]
 repo: https://github.com/carolisengineering/strength-in-numbers
 weight: 2
-status: In progress
 diagram:
   - { label: React SPA, next: "→" }
   - { label: Fastify API, style: primary, next: "→" }
