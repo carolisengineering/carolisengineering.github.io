@@ -87,8 +87,8 @@ main:focus { outline: none; }
 .section { padding-top: 64px; }
 .section > h2 { margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
 
-/* Project tiles */
-.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+/* Project tiles: one row each, so any number of projects lines up. */
+.tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .tile {
   display: flex;
   flex-direction: column;
@@ -102,8 +102,12 @@ main:focus { outline: none; }
   transition: border-color 150ms ease;
 }
 .tile:hover { border-color: var(--primary); }
-/* A project without a case study: a full-width row with no diagram panel. */
-.tile--compact { grid-column: 1 / -1; gap: 8px; padding: 16px 20px; }
+/* A case study: the diagram in a narrow panel on the left, its own column of title, summary and tags on the right. */
+.tile:not(.tile--compact) { display: grid; grid-template-columns: 220px minmax(0, 1fr); grid-template-rows: auto auto 1fr; gap: 8px 20px; }
+.tile:not(.tile--compact) > .tile-diagram { grid-row: 1 / -1; display: flex; align-items: center; justify-content: center; }
+.tile:not(.tile--compact) > .tile-title { padding-top: 4px; }
+/* A project without a case study: a compact row with no diagram panel. */
+.tile--compact { gap: 8px; padding: 16px 20px; }
 .tile-diagram { border-radius: var(--radius-box); container-type: inline-size; }
 .tile-diagram.panel--primary { padding: 16px; }
 .panel--primary { background: var(--primary-tint); }
@@ -113,7 +117,7 @@ main:focus { outline: none; }
 .status { display: inline-block; margin-left: 4px; padding: 2px 10px; border-radius: 999px; background: var(--secondary-tint); color: var(--secondary); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0; line-height: 1.5; vertical-align: middle; }
 .arrow { color: var(--secondary); }
 .tile-summary { color: var(--muted); font-size: 0.9375rem; }
-/* Tags sit on the bottom edge, so they line up across tiles of different lengths. */
+/* Tags sit on the bottom edge (an auto margin works in both the flex and the grid tile). */
 .tile > .tags { margin-top: auto; }
 
 /* Tech tags: a dot-separated list in the body font, set apart by colour and weight. */
@@ -200,7 +204,8 @@ main:focus { outline: none; }
 }
 
 @media (max-width: 640px) {
-  .tiles { grid-template-columns: minmax(0, 1fr); }
+  /* Too narrow for a side panel: the case study's tile stacks, diagram on top. */
+  .tile:not(.tile--compact) { display: flex; }
   /* On a phone the compact row drops its diagram, so it stays smaller than a case-study tile. */
   .tile--compact .tile-diagram { display: none; }
 }
