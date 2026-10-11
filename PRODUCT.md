@@ -55,7 +55,8 @@ Carol solves technical problems with code and communication: an engineer who bui
 - `data/about.json`: 5 years building production software; 5 languages (Python, Java, Go, JavaScript, TypeScript); 3 clouds (AWS, Azure, GCP); two roles, in the legal and communications industries; skills in ten categories.
 - `content/projects/office-hours.md`: full case study of a student-support agent on the Claude Agent SDK, with eval and red-team results.
 - `content/projects/strength-in-numbers.md`: full case study of a workout-tracking web app. The app itself is in progress (set logging and the workout screen are not built) and has no users yet, so its results are about correctness, not usage.
-- `content/projects/this-site.md`: tile only, links to the repo.
+- `content/projects/puzzle-punch.md`: full case study of a two-player browser game Carol co-designed, and of the public Firebase build with anonymous run telemetry she built.
+- The site's own source is linked from the footer (`siteRepo` in `data/about.json`); it no longer has a project tile.
 - `static/og.png` is the social card, generated from the homepage by `npm run og`.
 - Absent, and not to be fabricated: employer names, testimonials, metrics beyond those in the files above, a photo, a resume.
 

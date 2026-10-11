@@ -67,7 +67,7 @@ main:focus { outline: none; }
 .site-footer { margin-top: 80px; padding: 32px 0 48px; border-top: 1px solid var(--hairline); color: var(--muted); font-size: 0.875rem; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 .footer-links { display: flex; gap: 16px; margin: 0; padding: 0; list-style: none; }
-.footer-links a { display: inline-block; margin: -14px 0; padding: 14px 0; color: var(--muted); }
+.footer-links a, .footer-source { display: inline-block; margin: -14px 0; padding: 14px 0; color: var(--muted); }
 
 /* 404 */
 .not-found { padding-top: 64px; }

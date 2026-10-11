@@ -235,7 +235,7 @@ Light and unfussy: soft tints, thin lines, and generous space, with nothing that
 ### Navigation
 - **Style:** a single row with the "carol." wordmark on the left (18px bold, maroon dot) and three text links on the right (15px, muted).
 - **States:** links darken to ink on hover. There is no active state and no mobile menu; the row wraps.
-- **Footer:** a hairline rule, the outbound links in muted grey, and "Built with Hugo" at 14px.
+- **Footer:** a hairline rule, the outbound links in muted grey, and "Built with Hugo · Source on GitHub" at 14px, the source link in the same muted grey.
 
 ### Chain diagram (signature)
 A row of three or four labelled boxes joined by maroon arrows, generated from project front matter. Nodes are white with a 1.5px petrol outline and petrol text. One node per diagram is filled petrol to mark the centre of the system, and the final node may take a maroon outline. Arrows are drawn as small SVG strokes, not typed glyphs, so one-way and two-way connectors share one weight. A diagram is always one row or one column: when its container is too narrow for a row (520px for compact, 720px for large) it stacks with the arrows pointing down. The compact size (13px) sits in tiles, where the case-study tile's narrow side panel always stacks it as a column. A case study without an architecture diagram falls back to the large size (15px, centred) on its Petrol Tint panel.

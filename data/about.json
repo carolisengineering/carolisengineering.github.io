@@ -20,6 +20,7 @@
   "links": [
     { "label": "GitHub", "url": "https://github.com/carolisengineering" }
   ],
+  "siteRepo": "https://github.com/carolisengineering/carolisengineering.github.io",
   "skills": [
     { "category": "Languages", "items": ["Python", "Java", "Go", "TypeScript", "JavaScript"] },
     { "category": "Frameworks", "items": ["Spring", "FastAPI", "Django", "Fastify"] },
