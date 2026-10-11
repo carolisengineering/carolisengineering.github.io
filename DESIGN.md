@@ -192,7 +192,7 @@ Spacing follows a loose 4px rhythm: 4, 8, 12, 16, 20, 24, 32, 48, 64.
 
 Responsive behaviour:
 - **800px and below:** the case-study table of contents becomes a wrapping row of links above the article, and the article takes the full column.
-- **640px and below:** a case-study tile stacks its diagram above its text, timeline rows and skill rows collapse to one column, and display type drops to 30px. Fact tiles stack, each setting its value beside its label on a 120px column.
+- **640px and below:** project tiles drop their diagrams (each case study still opens on its own), timeline rows and skill rows collapse to one column, and display type drops to 30px. Fact tiles stack, each setting its value beside its label on a 120px column.
 - Text links in the nav, footer, and case-study header keep their visual size but carry padding that gives each a touch target at least 44px tall. The nav wraps instead of collapsing into a menu. Long strings break anywhere, and the page never scrolls horizontally at 375px.
 
 ## Elevation & Depth

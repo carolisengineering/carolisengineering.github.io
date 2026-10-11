@@ -204,10 +204,10 @@ main:focus { outline: none; }
 }
 
 @media (max-width: 640px) {
-  /* Too narrow for a side panel: the case study's tile stacks, diagram on top. */
+  /* Too narrow for a side panel, and a stacked diagram would make each tile a screen tall:
+     on a phone every tile drops its diagram. The case study still opens on it. */
   .tile:not(.tile--compact) { display: flex; }
-  /* On a phone the compact row drops its diagram, so it stays smaller than a case-study tile. */
-  .tile--compact .tile-diagram { display: none; }
+  .tile:not(.tile--compact) > .tile-diagram, .tile--compact > .tile-diagram { display: none; }
 }
 
 /* Hero */
