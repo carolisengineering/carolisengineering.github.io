@@ -3,7 +3,7 @@ title: This site
 summary: A portfolio built with Hugo and deployed to GitHub Pages by GitHub Actions
 tags: [Hugo, GitHub Actions]
 repo: https://github.com/carolisengineering/carolisengineering.github.io
-weight: 3
+weight: 4
 build:
   render: never
   list: always

@@ -49,6 +49,7 @@ test('the expected pages exist and nothing else is published as HTML', () => {
     '404.html',
     'index.html',
     'projects/office-hours/index.html',
+    'projects/puzzle-punch/index.html',
     'projects/strength-in-numbers/index.html',
   ]);
 });

@@ -18,7 +18,7 @@ const sourceHeadings = (slug) => {
   return headings;
 };
 
-for (const slug of ['office-hours', 'strength-in-numbers']) {
+for (const slug of ['office-hours', 'strength-in-numbers', 'puzzle-punch']) {
   const page = `projects/${slug}/index.html`;
   const doc = site.html(page);
 

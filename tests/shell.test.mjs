@@ -76,6 +76,7 @@ test('404 page has a heading and a link home', () => {
   assert.deepEqual(doc.querySelectorAll('.not-found-links a').map((l) => l.getAttribute('href')), [
     '/projects/office-hours/',
     '/projects/strength-in-numbers/',
+    '/projects/puzzle-punch/',
     'https://github.com/carolisengineering/carolisengineering.github.io',
   ]);
 });

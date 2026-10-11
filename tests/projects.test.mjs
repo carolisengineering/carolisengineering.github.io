@@ -10,8 +10,8 @@ const name = (tile) => tile.querySelector('.tile-name').text.trim();
 
 test('tiles are ordered by weight; only the tile-only project is compact', () => {
   const t = tiles();
-  assert.deepEqual(t.map(name), ['Office Hours', 'Strength in Numbers', 'This site']);
-  assert.deepEqual(t.map((x) => x.classList.contains('tile--compact')), [false, false, true]);
+  assert.deepEqual(t.map(name), ['Office Hours', 'Strength in Numbers', 'Puzzle Punch', 'This site']);
+  assert.deepEqual(t.map((x) => x.classList.contains('tile--compact')), [false, false, false, true]);
   assert.equal(site.html('index.html').querySelector('.tile--featured'), null);
 });
 
@@ -19,7 +19,8 @@ test('every tile shows its summary', () => {
   const t = tiles();
   assert.match(t[0].querySelector('.tile-summary').text, /AI agent that answers students/);
   assert.match(t[1].querySelector('.tile-summary').text, /Full-stack workout tracker for use at the gym/);
-  assert.match(t[2].querySelector('.tile-summary').text, /A portfolio built with Hugo/);
+  assert.match(t[2].querySelector('.tile-summary').text, /Two-player couch co-op game/);
+  assert.match(t[3].querySelector('.tile-summary').text, /A portfolio built with Hugo/);
 });
 
 test('case-study tiles link with →, tile-only projects link to the repo with ↗', () => {
@@ -27,6 +28,7 @@ test('case-study tiles link with →, tile-only projects link to the repo with �
   assert.deepEqual(t.map((x) => [x.getAttribute('href'), x.querySelector('.arrow').text]), [
     ['/projects/office-hours/', '→'],
     ['/projects/strength-in-numbers/', '→'],
+    ['/projects/puzzle-punch/', '→'],
     ['https://github.com/carolisengineering/carolisengineering.github.io', '↗'],
   ]);
   assert.equal(site.exists('projects/this-site/index.html'), false);
@@ -38,7 +40,8 @@ test('case-study tiles put the diagram on a petrol panel; the compact tile has n
   const panels = tiles().map((x) => x.querySelector('.tile-diagram').classList);
   assert.ok(panels[0].contains('panel--primary'));
   assert.ok(panels[1].contains('panel--primary'));
-  assert.equal(panels[2].contains('panel--primary') || panels[2].contains('panel--secondary'), false);
+  assert.ok(panels[2].contains('panel--primary'));
+  assert.equal(panels[3].contains('panel--primary') || panels[3].contains('panel--secondary'), false);
 });
 
 test('diagram renders nodes, styles, connectors, and a readable aria-label', () => {
@@ -63,7 +66,7 @@ test('tags render as a list', () => {
 });
 
 test('changing weights reorders the tiles, and a tile-only project stays compact', () => {
-  const thisSite = readFileSync(join(ROOT, 'content/projects/this-site.md'), 'utf8').replace('weight: 3', 'weight: -1');
+  const thisSite = readFileSync(join(ROOT, 'content/projects/this-site.md'), 'utf8').replace('weight: 4', 'weight: -1');
   const s = buildSite({ files: { 'content/projects/this-site.md': thisSite } });
   const first = s.html('index.html').querySelector('#projects .tiles > a.tile');
   assert.ok(first.classList.contains('tile--compact'));
@@ -115,6 +118,7 @@ test('each tile link is named by its title, described by its summary', () => {
   const described = (tile) => tile.getAttribute('aria-describedby').split(' ').map((x) => doc.getElementById(x).text.trim()).join(' | ');
   assert.match(described(tiles()[0]), /^AI agent that answers students[^|]*$/);
   assert.match(described(tiles()[1]), /^Full-stack workout tracker for use at the gym[^|]*$/);
+  assert.match(described(tiles()[2]), /^Two-player couch co-op game[^|]*$/);
   // No project currently sets a status, so no tile carries a badge in its accessible name.
   for (const tile of tiles()) {
     assert.equal(tile.querySelector('.status'), null);

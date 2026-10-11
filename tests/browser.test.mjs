@@ -53,7 +53,7 @@ function contrastAudit() {
   return failures;
 }
 
-const PAGES = ['/', '/projects/office-hours/', '/projects/strength-in-numbers/', '/404.html'];
+const PAGES = ['/', '/projects/office-hours/', '/projects/strength-in-numbers/', '/projects/puzzle-punch/', '/404.html'];
 
 for (const width of [375, 1280]) {
   for (const path of PAGES) {
