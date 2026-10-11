@@ -1,6 +1,6 @@
 ---
 title: Puzzle Punch
-summary: "Two-player couch co-op game in the browser: one player mines ore veins by solving line puzzles while the other holds off the dark. A public build on Firebase records anonymous play for the next design round."
+summary: "Two-player couch co-op game in the browser, with a public Firebase build that records anonymous play for the next design round."
 tags: [JavaScript, Canvas, Firebase, Firestore, Node.js, Game design]
 repo: https://github.com/carolisengineering/puzzle-punch-live
 weight: 3
