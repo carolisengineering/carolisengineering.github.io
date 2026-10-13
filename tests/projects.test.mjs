@@ -26,7 +26,7 @@ test('every tile shows its summary', () => {
   const t = tiles();
   assert.match(t[0].querySelector('.tile-summary').text, /AI agent that answers students/);
   assert.match(t[1].querySelector('.tile-summary').text, /Full-stack workout tracker for use at the gym/);
-  assert.match(t[2].querySelector('.tile-summary').text, /Two-player couch co-op game/);
+  assert.match(t[2].querySelector('.tile-summary').text, /A two-player couch co-op game/);
 });
 
 test('case-study tiles link with →, tile-only projects link to the repo with ↗', () => {
@@ -123,7 +123,7 @@ test('each tile link is named by its title, described by its summary', () => {
   const described = (tile) => tile.getAttribute('aria-describedby').split(' ').map((x) => doc.getElementById(x).text.trim()).join(' | ');
   assert.match(described(tiles()[0]), /^AI agent that answers students[^|]*$/);
   assert.match(described(tiles()[1]), /^Full-stack workout tracker for use at the gym[^|]*$/);
-  assert.match(described(tiles()[2]), /^Two-player couch co-op game[^|]*$/);
+  assert.match(described(tiles()[2]), /^A two-player couch co-op game[^|]*$/);
   // No project currently sets a status, so no tile carries a badge in its accessible name.
   for (const tile of tiles()) {
     assert.equal(tile.querySelector('.status'), null);

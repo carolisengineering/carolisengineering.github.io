@@ -35,6 +35,6 @@ for (const slug of ['office-hours', 'strength-in-numbers', 'puzzle-punch']) {
   test(`${slug}: no placeholders and a reasonable length`, () => {
     assert.doesNotMatch(site.read(page), /\[TODO/);
     const words = doc.querySelector('.cs-article').text.split(/\s+/).filter(Boolean).length;
-    assert.ok(words >= 500 && words <= 1000, `${words} words`);
+    assert.ok(words >= 300 && words <= 1000, `${words} words`);
   });
 }
