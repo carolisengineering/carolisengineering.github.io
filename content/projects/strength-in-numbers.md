@@ -9,9 +9,9 @@ diagram:
   - { label: Fastify API, style: primary, next: "→" }
   - { label: PostgreSQL, style: secondary }
 outcomes:
-  - { value: Browser to database, label: "written in TypeScript from the React UI to the Prisma queries" }
-  - { value: Auth0 sign-in, label: "OAuth 2.0 PKCE in the browser, with the API verifying every token against Auth0's published keys" }
-  - { value: Staging on Render, label: "Dockerized and deployed, with migrations as explicit release steps and a browser smoke test after every deploy" }
+  - { value: Full Stack, label: "written in TypeScript from the React UI to the Prisma queries" }
+  - { value: Auth0 Sign-In, label: "OAuth 2.0 PKCE in the browser, with the API verifying every token against Auth0's published keys" }
+  - { value: Staging on Render, label: "API in a multi-stage Docker image and the web app as a static site, both auto-deployed on push to main" }
 architecture:
   nodes:
     - { id: spa, label: React SPA, row: 1, col: 1 }
@@ -44,25 +44,25 @@ The core loop is complete: pick exercises, log sets, save the workout. Additiona
 
 The web app talks to the API over REST with bearer tokens. Sign-in goes through Auth0 using the OAuth 2.0 PKCE flow, and the browser holds tokens in memory only. The API checks every token against Auth0's published keys and creates a user row on first login.
 
-Every error the API returns uses one standard shape, and the web client turns them into typed errors. Request and response types come from shared Zod schemas, which also generate the OpenAPI document. CI fails if the published contract drifts from the code.
+Every error the API returns uses one standard shape, and the web client turns them into typed errors. Request and response types come from shared Zod schemas. CI regenerates the API's OpenAPI document from the code and fails if it doesn't match the committed copy, so published docs stay up to date.
 
-The exercise catalog syncs to the client incrementally with a sync token. Set writes go through a persisted outbox keyed on a client-generated ID, so a set logged in a dead spot survives a reload and syncs when the signal returns, and a retry can't create a duplicate. Finishing a workout recomputes personal records inside the same transaction and returns any new records to the client. History pages with a keyset cursor, so the list stays stable while new workouts land. Routines are saved as a whole and copied into a workout when it starts, targets and superset groups included, so editing or deleting a routine later never rewrites past workouts. Database migrations, catalog seeding, and record rebuilds run as explicit release steps, never when the app boots.
+Sets are written through a persisted outbox with client-generated IDs, so a set logged without a signal survives a reload, syncs when the connection returns, and can't be duplicated by a retry. Finishing a workout recomputes personal records in the same transaction and returns any new ones to the client. History uses keyset pagination, so the list stays stable as new workouts arrive. Routines are copied into a workout when it starts, so editing or deleting one never changes past workouts.
 
 ## Decisions & Tradeoffs
 
 {{< decision >}}Keep all domain logic in a framework-free package, and enforce it in CI. The shared package can't import React, the DOM, or Node-only APIs, so the same strength math runs in the API, in the browser, and in a future React Native app, without a rewrite.{{< /decision >}}
 
-**Client-only React, not Next.js.** I chose a client-only React app over Next.js. The whole app sits behind sign-in, so server rendering would add a server tier and concepts that buy nothing here and don't carry over to a mobile client.
+**Client-only React:** The whole app sits behind sign-in, so there's no public content for server rendering to speed up or index. A single page application is sufficient.
 
-**One language across the stack.** I chose Node and TypeScript for the API even though my earlier backend work was in Go. With one language across the stack, the domain rules are written and tested once instead of twice.
+**One language across the stack:** By using Node and TypeScript for the API, domain rules are written and tested once instead of twice.
 
-**Expand-only migrations.** Migrations are expand-only: a release never drops or renames a column that the running code still reads. That costs an extra release for some changes, but deploys never need downtime.
+**Backwards compatible migrations:** A release never drops or renames a column that the running code still reads. That means some changes require an extra release, but deploys never need downtime.
 
-**A written spec for every piece of work.** Every piece of work starts as a written spec with the same twelve sections, and each feature is split into an API spec and a UI spec, API first. The process is proportional to a one-person project, but it means every decision has a written reason.
+**A written spec for every piece of work:** Every piece of work starts as a written spec with the same twelve sections, and each feature is split into an API spec and a UI spec, API first. The process is proportional to a one-person project, but it means every decision has a written reason.
 
 ## Results
 
-With limited usage, the results so far are about correctness:
+With limited usage, the results so far prioritize correctness:
 
 - Every behavioral acceptance criterion in a spec has at least one test that names it, so the spec and the test suite can be checked against each other.
 - The auth plugin, rate limiter, and user repository must stay at or above 90% line coverage. So must the web app's API client, auth code, workout features, and offline outbox.
@@ -74,4 +74,4 @@ With limited usage, the results so far are about correctness:
 
 - Log real gym sessions from a phone to help determine which offline features add the most value: draft rows, multi-tab safety, a logout guard for unsaved sets
 - Account export and deletion, and production observability with traces and alerts
-- Move hosting from Render to AWS with infrastructure as code, as its own project
+- Move hosting from Render to AWS with infrastructure as code
