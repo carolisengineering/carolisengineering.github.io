@@ -25,7 +25,8 @@
   --page-width: 760px;
 }
 
-body.wide { --page-width: 960px; }
+/* Case studies: a 180px TOC, a 64px gap, and a 640px column, plus the side gutters. */
+body.wide { --page-width: 924px; }
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -67,7 +68,7 @@ main:focus { outline: none; }
 .site-footer { margin-top: 80px; padding: 32px 0 48px; border-top: 1px solid var(--hairline); color: var(--muted); font-size: 0.875rem; }
 .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 .footer-links { display: flex; gap: 16px; margin: 0; padding: 0; list-style: none; }
-.footer-links a { display: inline-block; margin: -14px 0; padding: 14px 0; color: var(--muted); }
+.footer-links a, .footer-source { display: inline-block; margin: -14px 0; padding: 14px 0; color: var(--muted); }
 
 /* 404 */
 .not-found { padding-top: 64px; }
@@ -87,8 +88,8 @@ main:focus { outline: none; }
 .section { padding-top: 64px; }
 .section > h2 { margin-bottom: 20px; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
 
-/* Project tiles */
-.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+/* Project tiles: one row each, so any number of projects lines up. */
+.tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .tile {
   display: flex;
   flex-direction: column;
@@ -102,8 +103,12 @@ main:focus { outline: none; }
   transition: border-color 150ms ease;
 }
 .tile:hover { border-color: var(--primary); }
-/* A project without a case study: a full-width row with no diagram panel. */
-.tile--compact { grid-column: 1 / -1; gap: 8px; padding: 16px 20px; }
+/* A case study: the diagram in a narrow panel on the left, its own column of title, summary and tags on the right. */
+.tile:not(.tile--compact) { display: grid; grid-template-columns: 220px minmax(0, 1fr); grid-template-rows: auto auto 1fr; gap: 8px 20px; }
+.tile:not(.tile--compact) > .tile-diagram { grid-row: 1 / -1; display: flex; align-items: center; justify-content: center; }
+.tile:not(.tile--compact) > .tile-title { padding-top: 4px; }
+/* A project without a case study: a compact row with no diagram panel. */
+.tile--compact { gap: 8px; padding: 16px 20px; }
 .tile-diagram { border-radius: var(--radius-box); container-type: inline-size; }
 .tile-diagram.panel--primary { padding: 16px; }
 .panel--primary { background: var(--primary-tint); }
@@ -113,7 +118,7 @@ main:focus { outline: none; }
 .status { display: inline-block; margin-left: 4px; padding: 2px 10px; border-radius: 999px; background: var(--secondary-tint); color: var(--secondary); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0; line-height: 1.5; vertical-align: middle; }
 .arrow { color: var(--secondary); }
 .tile-summary { color: var(--muted); font-size: 0.9375rem; }
-/* Tags sit on the bottom edge, so they line up across tiles of different lengths. */
+/* Tags sit on the bottom edge (an auto margin works in both the flex and the grid tile). */
 .tile > .tags { margin-top: auto; }
 
 /* Tech tags: a dot-separated list in the body font, set apart by colour and weight. */
@@ -146,7 +151,7 @@ main:focus { outline: none; }
   .diagram--compact, .diagram--compact .step { flex-direction: column; flex-wrap: nowrap; align-items: center; gap: 0; }
   .diagram--compact .edge { margin: 9px 0; transform: rotate(90deg); }
 }
-@container (max-width: 720px) {
+@container (max-width: 600px) {
   .diagram--large, .diagram--large .step { flex-direction: column; flex-wrap: nowrap; align-items: center; gap: 0; }
   .diagram--large .edge { margin: 12px 0; transform: rotate(90deg); }
 }
@@ -180,7 +185,7 @@ main:focus { outline: none; }
 .arch-edge--cross .arch-head--start { margin-bottom: -8px; transform: rotate(-45deg); }
 
 /* Too narrow for the wide layout: transpose the grid, so rows become columns and each connector turns with it. */
-@container (max-width: 720px) {
+@container (max-width: 600px) {
   .arch > * { grid-area: var(--tall); }
   .arch-node { padding: 8px 10px; }
 
@@ -200,9 +205,10 @@ main:focus { outline: none; }
 }
 
 @media (max-width: 640px) {
-  .tiles { grid-template-columns: minmax(0, 1fr); }
-  /* On a phone the compact row drops its diagram, so it stays smaller than a case-study tile. */
-  .tile--compact .tile-diagram { display: none; }
+  /* Too narrow for a side panel, and a stacked diagram would make each tile a screen tall:
+     on a phone every tile drops its diagram. The case study still opens on it. */
+  .tile:not(.tile--compact) { display: flex; }
+  .tile:not(.tile--compact) > .tile-diagram, .tile--compact > .tile-diagram { display: none; }
 }
 
 /* Hero */
@@ -246,7 +252,7 @@ main:focus { outline: none; }
 
 /* Skills */
 .skills { margin: 0; }
-.skill-row { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 16px; padding: 8px 0; }
+.skill-row { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 16px; padding: 8px 0; }
 .skills dt { color: var(--subtle); font-size: 0.9375rem; }
 .skills dd { margin: 0; }
 /* The same dot that separates tech tags. */
@@ -262,22 +268,24 @@ main:focus { outline: none; }
 
 /* Case study */
 .cs-header { display: flex; flex-direction: column; gap: 12px; padding-top: 32px; }
-.cs-header .lede { margin-top: 0; }
+.cs-header .lede { margin-top: 0; max-width: none; }
 .cs-header h1 { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; overflow-wrap: anywhere; }
 .back-link, .repo-link { display: inline-block; margin: -12px 0; padding: 12px 0; font-size: 0.9375rem; font-weight: 500; text-decoration: none; }
 .back-link:hover, .repo-link:hover { text-decoration: underline; }
-.cs-hero { margin-top: 32px; padding: 40px 24px; border-radius: var(--radius-tile); container-type: inline-size; }
+.cs-hero { margin-top: 32px; padding: 40px 16px; border-radius: var(--radius-tile); container-type: inline-size; }
 /* Results at a glance, between the diagram and the article. */
 .cs-outcomes { margin-top: 12px; }
-.cs-body { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 64px; margin-top: 48px; }
+.cs-body { display: grid; grid-template-columns: 180px minmax(0, 640px); column-gap: 64px; justify-content: center; }
+/* Header, diagram, results, and article all share the one column, so every section has the same edges.
+   640px sets the article at about 66ch, the top of a comfortable measure. */
+.cs-body > * { grid-column: 2; min-width: 0; }
+.cs-body > .toc { grid-column: 1; grid-row: 1 / span 4; margin-top: 32px; }
 .toc { position: sticky; top: 24px; align-self: start; font-size: 0.875rem; }
 .toc ul { margin: 0; padding: 0; list-style: none; }
 .toc a { display: block; padding: 4px 0 4px 12px; border-left: 2px solid var(--hairline); color: var(--muted); text-decoration: none; transition: color 150ms ease, border-color 150ms ease; }
 .toc a:hover { color: var(--text); }
 .toc a.is-active { border-left-color: var(--primary); color: var(--primary); font-weight: 500; }
-.cs-main { min-width: 0; }
-/* ch is the width of "0", wider than the average letter: 56ch sets about 72 characters to a line in IBM Plex Sans. */
-.cs-article, .cs-end { max-width: 56ch; }
+.cs-main { margin-top: 48px; }
 .cs-article p, .cs-article li { text-wrap: pretty; }
 .cs-article h2 { margin: 48px 0 12px; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; scroll-margin-top: 24px; }
 .cs-article h2:first-child { margin-top: 0; }
@@ -307,7 +315,9 @@ main:focus { outline: none; }
 
 @media (max-width: 800px) {
   /* The contents list stops being a sticky rail and becomes a wrapping row above the article. */
-  .cs-body { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-top: 32px; }
+  .cs-body { grid-template-columns: minmax(0, 1fr); }
+  .cs-body > *, .cs-body > .toc { grid-column: 1; grid-row: auto; }
+  .cs-main { margin-top: 24px; }
   .toc { position: static; padding-bottom: 8px; border-bottom: 1px solid var(--hairline); }
   .toc ul { display: flex; flex-wrap: wrap; gap: 0 20px; }
   .toc a { padding: 12px 0; border-left: 0; }

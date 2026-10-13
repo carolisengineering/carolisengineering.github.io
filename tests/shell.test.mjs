@@ -54,10 +54,13 @@ test('favicon and self-hosted fonts are published with their licenses', () => {
   }
 });
 
-test('footer lists every link and says Built with Hugo', () => {
+test('footer lists every link, says Built with Hugo, and links the source', () => {
   const footer = site.html('index.html').querySelector('footer');
-  assert.deepEqual(footer.querySelectorAll('a').map((a) => a.getAttribute('href')), ['https://github.com/carolisengineering']);
-  assert.match(footer.text, /Built with Hugo/);
+  assert.deepEqual(footer.querySelectorAll('a').map((a) => a.getAttribute('href')), [
+    'https://github.com/carolisengineering',
+    'https://github.com/carolisengineering/carolisengineering.github.io',
+  ]);
+  assert.match(footer.text, /Built with Hugo · Source on GitHub/);
 });
 
 test('adding an Email link is a data-only change', () => {
@@ -76,7 +79,7 @@ test('404 page has a heading and a link home', () => {
   assert.deepEqual(doc.querySelectorAll('.not-found-links a').map((l) => l.getAttribute('href')), [
     '/projects/office-hours/',
     '/projects/strength-in-numbers/',
-    'https://github.com/carolisengineering/carolisengineering.github.io',
+    '/projects/puzzle-punch/',
   ]);
 });
 

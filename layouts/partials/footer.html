@@ -5,6 +5,6 @@
       <li><a href="{{ .url }}" rel="noopener">{{ .label }}</a></li>
       {{ end }}
     </ul>
-    <p>Built with Hugo</p>
+    <p>Built with Hugo{{ with hugo.Data.about.siteRepo }} · <a class="footer-source" href="{{ . }}" rel="noopener">Source on GitHub</a>{{ end }}</p>
   </div>
 </footer>

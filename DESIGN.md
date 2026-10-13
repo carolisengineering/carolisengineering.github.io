@@ -121,7 +121,7 @@ components:
 
 The site reads like a clean technical drawing with notes in the margin. Each project is introduced by a small architecture diagram, three or four labelled boxes joined by arrows, and the reasoning behind the work is set apart in maroon "Key decision" notes. Petrol blue draws the structure; maroon marks the annotation. Everything else is ink on off-white paper.
 
-The feel is light and unfussy. Surfaces are flat, tints are soft, and space does the separating that borders and shadows would do elsewhere. A narrow single column (760px on the homepage, 960px on case studies) keeps the page calm and quick to skim. The system was built to replace a dark, aqua, card-heavy theme that looked generic, and it deliberately avoids every one of those traits.
+The feel is light and unfussy. Surfaces are flat, tints are soft, and space does the separating that borders and shadows would do elsewhere. A narrow single column (760px on the homepage, 640px beside a table of contents on case studies) keeps the page calm and quick to skim. The system was built to replace a dark, aqua, card-heavy theme that looked generic, and it deliberately avoids every one of those traits.
 
 **Key Characteristics:**
 - Light mode only, on warm off-white paper.
@@ -174,7 +174,7 @@ Sizes are written in `rem` in the stylesheet, so the scale follows the visitor's
 - **Headline** (600, 24px, 1.25, -0.02em): section headings on the homepage and inside case studies.
 - **Title** (600, 17px, 1.25): project tile names and case-study subheadings. Fact values use the same weight at 20px.
 - **Lede** (400, 17px, 1.6): the sentence under a display heading, in muted grey, capped at 60ch.
-- **Body** (400, 16px, 1.6): running text. Case-study prose is capped at 56ch, which sets about 72 characters to a line in IBM Plex Sans (`ch` is the width of "0", wider than the average letter). Headings use balanced wrapping. Secondary text steps down to 15px and 14px.
+- **Body** (400, 16px, 1.6): running text. Case-study prose fills the 640px case-study column, about 66ch. Headings use balanced wrapping. Secondary text steps down to 15px and 14px.
 - **Label** (500, 13px, Petrol Dark): tech tags.
 
 ### Named Rules
@@ -184,15 +184,15 @@ Sizes are written in `rem` in the stylesheet, so the scale follows the visitor's
 
 ## Layout
 
-A single centred column with 20px side gutters: 760px wide on the homepage, 960px on case-study pages. The homepage runs hero, About, Projects, Experience, Skills; Experience is hidden while `showExperience` is `false` in `data/about.json`. Sections are stacked with 64px above each, and the hero sits 48px below the nav. The footer follows an 80px gap and a hairline rule.
+A single centred column with 20px side gutters: 760px wide on the homepage, 924px on case-study pages. The homepage runs hero, About, Projects, Experience, Skills; Experience is hidden while `showExperience` is `false` in `data/about.json`. Sections are stacked with 64px above each, and the hero sits 48px below the nav. The footer follows an 80px gap and a hairline rule.
 
-Project tiles sit in a two-column grid with a 16px gap; a project without a case study spans both columns as a compact row. Fact tiles auto-fit at a 160px minimum. The experience timeline and skills list are two-column rows, a fixed label column (120px and 160px) beside the content. Case studies place a 180px sticky table of contents beside the article with a 64px gap.
+Project tiles stack one per row with a 16px gap, so any number of projects lines up. A case-study tile puts its diagram in a 220px panel on the left and its title, summary and tags in a column beside it; a project without a case study is a compact row. Fact tiles auto-fit at a 160px minimum. The experience timeline and skills list are two-column rows, a fixed label column (120px and 180px) beside the content. Case studies are a two-column grid: a 180px sticky table of contents, a 64px gap, and one 640px column that holds the header, diagram, results, and article, so every section shares the same left and right edges. The summary under the title fills that column rather than stopping at the 60ch lede cap.
 
 Spacing follows a loose 4px rhythm: 4, 8, 12, 16, 20, 24, 32, 48, 64.
 
 Responsive behaviour:
 - **800px and below:** the case-study table of contents becomes a wrapping row of links above the article, and the article takes the full column.
-- **640px and below:** tiles, timeline rows, and skill rows collapse to one column, and display type drops to 30px. Fact tiles stack, each setting its value beside its label on a 120px column.
+- **640px and below:** project tiles drop their diagrams (each case study still opens on its own), timeline rows and skill rows collapse to one column, and display type drops to 30px. Fact tiles stack, each setting its value beside its label on a 120px column.
 - Text links in the nav, footer, and case-study header keep their visual size but carry padding that gives each a touch target at least 44px tall. The nav wraps instead of collapsing into a menu. Long strings break anywhere, and the page never scrolls horizontally at 375px.
 
 ## Elevation & Depth
@@ -230,21 +230,21 @@ Light and unfussy: soft tints, thin lines, and generous space, with nothing that
 - **Shadow Strategy:** none; see Elevation & Depth.
 - **Border:** hairline at rest, petrol on hover.
 - **Internal Padding:** 20px, with 12px between the diagram, title, summary, and tags.
-- **Behaviour:** the whole tile is one link. The title ends in a maroon arrow: `→` when it opens a case study, `↗` when it leaves for GitHub. Every tile shows its summary. Projects with a case study get equal tiles, two to a row. A project without one gets a compact full-width row: tighter padding (16px by 20px) and no diagram panel.
+- **Behaviour:** the whole tile is one link. The title ends in a maroon arrow: `→` when it opens a case study, `↗` when it leaves for GitHub. Every tile shows its summary. Projects with a case study get full-width row tiles, the diagram panel beside the text. A project without one gets a compact row: tighter padding (16px by 20px) and no diagram panel.
 
 ### Navigation
 - **Style:** a single row with the "carol." wordmark on the left (18px bold, maroon dot) and three text links on the right (15px, muted).
 - **States:** links darken to ink on hover. There is no active state and no mobile menu; the row wraps.
-- **Footer:** a hairline rule, the outbound links in muted grey, and "Built with Hugo" at 14px.
+- **Footer:** a hairline rule, the outbound links in muted grey, and "Built with Hugo · Source on GitHub" at 14px, the source link in the same muted grey.
 
 ### Chain diagram (signature)
-A row of three or four labelled boxes joined by maroon arrows, generated from project front matter. Nodes are white with a 1.5px petrol outline and petrol text. One node per diagram is filled petrol to mark the centre of the system, and the final node may take a maroon outline. Arrows are drawn as small SVG strokes, not typed glyphs, so one-way and two-way connectors share one weight. A diagram is always one row or one column: when its container is too narrow for a row (520px for compact, 720px for large) it stacks with the arrows pointing down. The compact size (13px) sits in tiles. A case study without an architecture diagram falls back to the large size (15px, centred) on its Petrol Tint panel.
+A row of three or four labelled boxes joined by maroon arrows, generated from project front matter. Nodes are white with a 1.5px petrol outline and petrol text. One node per diagram is filled petrol to mark the centre of the system, and the final node may take a maroon outline. Arrows are drawn as small SVG strokes, not typed glyphs, so one-way and two-way connectors share one weight. A diagram is always one row or one column: when its container is too narrow for a row (520px for compact, 600px for large) it stacks with the arrows pointing down. The compact size (13px) sits in tiles, where the case-study tile's narrow side panel always stacks it as a column. A case study without an architecture diagram falls back to the large size (15px, centred) on its Petrol Tint panel.
 
 ### Key decision note (signature)
 A Maroon Tint block (8px corners) with a small maroon "Key decision" label sitting on its top edge, like a tag on a drawing: white 13px semibold text on a fully rounded maroon pill. There is no side stripe. It marks the one choice in a case study that mattered most. It appears only in the case study; homepage tiles stay to diagram, title, summary, and tags.
 
 ### Architecture diagram (signature)
-The diagram at the top of a case study. Up to about six nodes sit on a small grid, joined by thin maroon connectors that can carry a one-word label ("REST", "search"). Nodes may carry a second, lighter line. Connectors are drawn with borders, so they stretch to fit. Below 720px of container width the grid transposes, rows becoming columns, so the diagram stays legible on a phone instead of shrinking. Tiles keep the short three-box chain.
+The diagram at the top of a case study. Up to about six nodes sit on a small grid, joined by thin maroon connectors that can carry a one-word label ("REST", "search"). Nodes may carry a second, lighter line. Connectors are drawn with borders, so they stretch to fit. Below 600px of container width the grid transposes, rows becoming columns, so the diagram stays legible on a phone instead of shrinking. Tiles keep the short three-box chain.
 
 ### Results at a glance
 A row of fact tiles directly under a case study's diagram, each a short figure over a plain label, taken from the project's `outcomes` front matter. It lets a reader find the results without scrolling to the Results section.
