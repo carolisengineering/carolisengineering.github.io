@@ -3,7 +3,7 @@ title: Office Hours
 summary: AI agent that answers students' questions from their program's documentation, with automated tests that grade its answers and try to break it
 tags: [Python, RAG, Evals, Langfuse, Red-teaming, Claude Agent SDK]
 repo: https://github.com/carolisengineering/office-hours
-weight: 1
+weight: 2
 diagram:
   - { label: Student question, next: "→" }
   - { label: Agent, style: primary, next: "⇄" }
