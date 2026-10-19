@@ -20,6 +20,7 @@
   {{ with resources.Get "css/site.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
   {{ end }}
+  {{- partial "analytics.html" . }}
 </head>
 <body{{ if and .IsPage (eq .Section "projects") }} class="wide"{{ end }}>
   <a class="skip-link" href="#main">Skip to content</a>
