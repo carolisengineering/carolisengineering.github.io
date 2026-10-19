@@ -71,7 +71,7 @@ test('decision shortcode renders a callout with markdown inside', () => {
 
 test('page is wide and ships the TOC highlight script', () => {
   assert.ok(doc.querySelector('body.wide'));
-  assert.match(doc.querySelector('script').text, /aria-current/);
+  assert.ok(doc.querySelectorAll('script').some((s) => /aria-current/.test(s.text)), 'a script sets aria-current on the TOC');
   assert.match(site.read('projects/office-hours/index.html'), /<title>Office Hours · carolisengineering<\/title>/);
 });
 
