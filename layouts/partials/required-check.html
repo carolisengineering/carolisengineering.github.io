@@ -1,10 +1,11 @@
 {{- /*
   Called with the home page. Warns for every required field that is missing or empty in
   about.json or a project's front matter, so --panicOnWarning blocks a deploy that would
-  render an empty element or a dead link.
+  render an empty element or a dead link. "experience" is optional (the section is hidden
+  without it), but each entry it does have must be complete.
 */ -}}
 {{- $about := hugo.Data.about -}}
-{{- range slice "headline" "headlineHighlight" "lede" "facts" "experience" "links" "skills" -}}
+{{- range slice "headline" "headlineHighlight" "lede" "facts" "links" "skills" -}}
   {{- if not (index $about .) }}{{ warnf "data/about.json is missing %s" . }}{{ end -}}
 {{- end -}}
 {{- range $list, $keys := dict

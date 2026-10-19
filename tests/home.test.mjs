@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSite, fillPlaceholders, readAbout } from './helpers.mjs';
+import { buildSite, fillPlaceholders, readAbout, SAMPLE_EXPERIENCE } from './helpers.mjs';
 
 const about = fillPlaceholders(readAbout());
 const doc = buildSite().html('index.html');
@@ -42,10 +42,7 @@ test('experience timeline shows years, role · industry, and summary', () => {
   const two = withAbout((a) => ({
     ...a,
     showExperience: true,
-    experience: [
-      { start: '2022', end: 'now', role: 'Software Engineer', industry: 'EdTech', summary: 'Built things.' },
-      { start: '2019', end: '2022', role: 'Developer', industry: 'Logistics', summary: 'Shipped things.' },
-    ],
+    experience: SAMPLE_EXPERIENCE,
   }));
   const rows = two.querySelectorAll('#experience .timeline > li.timeline-row');
   assert.equal(rows.length, 2);
@@ -62,17 +59,17 @@ test('an empty experience list hides the Experience section', () => {
 });
 
 test('showExperience false hides the section; true or missing shows it', () => {
-  const off = withAbout((a) => ({ ...a, showExperience: false }));
+  const off = withAbout((a) => ({ ...a, experience: SAMPLE_EXPERIENCE, showExperience: false }));
   assert.equal(off.querySelector('#experience'), null);
-  assert.ok(withAbout((a) => ({ ...a, showExperience: true })).querySelector('#experience .timeline'));
-  assert.ok(withAbout(({ showExperience, ...a }) => a).querySelector('#experience .timeline'));
+  assert.ok(withAbout((a) => ({ ...a, experience: SAMPLE_EXPERIENCE, showExperience: true })).querySelector('#experience .timeline'));
+  assert.ok(withAbout(({ showExperience, ...a }) => ({ ...a, experience: SAMPLE_EXPERIENCE })).querySelector('#experience .timeline'));
 });
 
 test('a stray company field is never rendered', () => {
   const leaked = withAbout((a) => ({
     ...a,
     showExperience: true,
-    experience: a.experience.map((e) => ({ ...e, company: 'Acme Employer Inc' })),
+    experience: SAMPLE_EXPERIENCE.map((e) => ({ ...e, company: 'Acme Employer Inc' })),
   }));
   assert.doesNotMatch(leaked.toString(), /Acme Employer Inc/);
 });

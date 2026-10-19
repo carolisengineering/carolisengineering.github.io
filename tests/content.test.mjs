@@ -1,15 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSite, fillPlaceholders, readAbout } from './helpers.mjs';
+import { buildSite, fillPlaceholders, readAbout, SAMPLE_EXPERIENCE } from './helpers.mjs';
 
 const about = readAbout();
 
 test('about.json has the spec shape and no employer, avatar, or title fields', () => {
   for (const key of ['avatar', 'title', 'bio', 'company']) assert.ok(!(key in about), `unexpected key ${key}`);
-  for (const key of ['name', 'headline', 'headlineHighlight', 'lede', 'facts', 'experience', 'links', 'skills']) {
+  for (const key of ['name', 'headline', 'headlineHighlight', 'lede', 'facts', 'links', 'skills']) {
     assert.ok(key in about, `missing key ${key}`);
   }
-  for (const entry of about.experience) {
+  for (const entry of about.experience ?? []) {
     assert.deepEqual(Object.keys(entry).sort(), ['end', 'industry', 'role', 'start', 'summary']);
   }
   assert.ok(about.facts.length >= 1);
@@ -29,7 +29,7 @@ test('unfilled placeholders warn but still render; --panicOnWarning fails', () =
   const withTodos = (a) => ({
     ...a,
     facts: [{ ...a.facts[0], value: '[TODO years]' }, ...a.facts.slice(1)],
-    experience: [{ ...a.experience[0], start: '[TODO start]' }, ...a.experience.slice(1)],
+    experience: [{ ...SAMPLE_EXPERIENCE[0], start: '[TODO start]' }, ...SAMPLE_EXPERIENCE.slice(1)],
   });
   const raw = buildSite({ about: withTodos });
   assert.ok(raw.ok, raw.log);

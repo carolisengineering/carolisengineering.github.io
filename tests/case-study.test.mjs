@@ -89,8 +89,8 @@ test('each navigation landmark has its own label', () => {
 test('the page ends with the next case study, the repo, and a way back', () => {
   const end = doc.querySelector('.cs-main nav.cs-end');
   const next = end.querySelector('a.cs-next');
-  assert.equal(next.getAttribute('href'), '/projects/strength-in-numbers/');
-  assert.match(next.text, /^Next project: Strength in Numbers/);
+  assert.equal(next.getAttribute('href'), '/projects/puzzle-punch/');
+  assert.match(next.text, /^Next project: Puzzle Punch/);
   assert.equal(end.querySelector('a.repo-link').getAttribute('href'), 'https://github.com/carolisengineering/office-hours');
   assert.equal(end.querySelector('a.back-link').getAttribute('href'), '/#projects');
 });

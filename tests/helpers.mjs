@@ -25,6 +25,13 @@ export function fillPlaceholders(value) {
   return value;
 }
 
+// Experience is not kept in data/about.json while the section is hidden, so tests that
+// need entries supply these.
+export const SAMPLE_EXPERIENCE = [
+  { start: '2022', end: 'now', role: 'Software Engineer', industry: 'EdTech', summary: 'Built things.' },
+  { start: '2019', end: '2022', role: 'Developer', industry: 'Logistics', summary: 'Shipped things.' },
+];
+
 export function readAbout() {
   return JSON.parse(readFileSync(join(ROOT, 'data/about.json'), 'utf8'));
 }

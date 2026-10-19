@@ -1,9 +1,9 @@
 ---
 title: Strength in Numbers
-summary: "Full-stack workout tracker for use at the gym. Log sets from your phone, even offline, then track your history, progress charts, and personal records."
+summary: "A full-stack workout tracker for use at the gym. Log sets from your phone, even offline. Save routines for repeated workouts. View history, progress charts, and personal records."
 tags: [TypeScript, React, Fastify, Prisma, PostgreSQL, Docker]
 repo: https://github.com/carolisengineering/strength-in-numbers
-weight: 2
+weight: 1
 diagram:
   - { label: React SPA, next: "→" }
   - { label: Fastify API, style: primary, next: "→" }
@@ -38,7 +38,9 @@ This is a TypeScript monorepo with three parts:
 - **A shared domain package** holding the types, validation schemas, unit conversion, and strength math, written once and used everywhere
 - **A React single-page app** built with Vite and designed for a phone browser first
 
-The core loop is complete: pick exercises, log sets, save the workout. Additional features include a history list, per-exercise progress charts, and a personal-record engine that tracks four record types per exercise.
+The core loop is complete: pick exercises, log sets, save the workout. Additional features include saved routines, a workout history list, per-exercise progress charts, and a personal-record engine that tracks four record types per exercise.
+
+The interface also has a consistent visual identity with light and dark themes, and a landing page for signed-out visitors.
 
 ## Functionality
 
@@ -47,6 +49,10 @@ The web app talks to the API over REST with bearer tokens. Sign-in goes through 
 Every error the API returns uses one standard shape, and the web client turns them into typed errors. Request and response types come from shared Zod schemas. CI regenerates the API's OpenAPI document from the code and fails if it doesn't match the committed copy, so published docs stay up to date.
 
 Sets are written through a persisted outbox with client-generated IDs, so a set logged without a signal survives a reload, syncs when the connection returns, and can't be duplicated by a retry. Finishing a workout recomputes personal records in the same transaction and returns any new ones to the client. History uses keyset pagination, so the list stays stable as new workouts arrive. Routines are copied into a workout when it starts, so editing or deleting one never changes past workouts.
+
+Finished workouts can be updated on the server. Set and exercise writes are accepted after a workout ends, and each one recomputes the affected personal records in the same transaction under a per-user lock. A workout's start time can also be changed, which shifts its set times and recomputes records.
+
+Account deletion consists of an immediate soft delete, followed by a purge command that hard-deletes accounts after the grace period. The data export is one JSON document built from the same mappers as the read routes, so the two can't drift apart.
 
 ## Decisions & Tradeoffs
 
@@ -72,6 +78,6 @@ With limited usage, the results so far prioritize correctness:
 
 ## Future Work
 
-- Log real gym sessions from a phone to help determine which offline features add the most value: draft rows, multi-tab safety, a logout guard for unsaved sets
-- Account export and deletion, and production observability with traces and alerts
-- Move hosting from Render to AWS with infrastructure as code
+- Edit screens for past workouts and workout times, built on top of existing APIS
+- Production observability with metrics and traces, specs are written and approved
+- A gated staging-to-production pipeline, then moving hosting from Render to AWS with infrastructure as code

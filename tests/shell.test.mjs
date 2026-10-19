@@ -77,8 +77,8 @@ test('404 page has a heading and a link home', () => {
   assert.equal(doc.querySelector('main h1').text.trim(), 'Page not found');
   assert.ok(doc.querySelector('main a[href="/"]'));
   assert.deepEqual(doc.querySelectorAll('.not-found-links a').map((l) => l.getAttribute('href')), [
-    '/projects/office-hours/',
     '/projects/strength-in-numbers/',
+    '/projects/office-hours/',
     '/projects/puzzle-punch/',
   ]);
 });
