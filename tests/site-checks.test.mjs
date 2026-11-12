@@ -48,6 +48,7 @@ test('the expected pages exist and nothing else is published as HTML', () => {
   assert.deepEqual(pages.map((f) => relative(site.out, f)).sort(), [
     '404.html',
     'index.html',
+    'projects/glazette/index.html',
     'projects/office-hours/index.html',
     'projects/puzzle-punch/index.html',
     'projects/strength-in-numbers/index.html',

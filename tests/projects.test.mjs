@@ -17,22 +17,24 @@ const name = (tile) => tile.querySelector('.tile-name').text.trim();
 
 test('tiles are ordered by weight; only the tile-only project is compact', () => {
   const t = tiles();
-  assert.deepEqual(t.map(name), ['Strength in Numbers', 'Office Hours', 'Puzzle Punch']);
-  assert.deepEqual(tiles(withCompact).map((x) => x.classList.contains('tile--compact')), [false, false, false, true]);
+  assert.deepEqual(t.map(name), ['Strength in Numbers', 'Glazette', 'Office Hours', 'Puzzle Punch']);
+  assert.deepEqual(tiles(withCompact).map((x) => x.classList.contains('tile--compact')), [false, false, false, false, true]);
   assert.equal(site.html('index.html').querySelector('.tile--featured'), null);
 });
 
 test('every tile shows its summary', () => {
   const t = tiles();
   assert.match(t[0].querySelector('.tile-summary').text, /full-stack workout tracker for use at the gym/i);
-  assert.match(t[1].querySelector('.tile-summary').text, /AI agent that answers students/);
-  assert.match(t[2].querySelector('.tile-summary').text, /A two-player couch co-op game/);
+  assert.match(t[1].querySelector('.tile-summary').text, /photo-first pottery journal/);
+  assert.match(t[2].querySelector('.tile-summary').text, /AI agent that answers students/);
+  assert.match(t[3].querySelector('.tile-summary').text, /A two-player couch co-op game/);
 });
 
 test('case-study tiles link with →, tile-only projects link to the repo with ↗', () => {
   const t = tiles(withCompact);
   assert.deepEqual(t.map((x) => [x.getAttribute('href'), x.querySelector('.arrow').text]), [
     ['/projects/strength-in-numbers/', '→'],
+    ['/projects/glazette/', '→'],
     ['/projects/office-hours/', '→'],
     ['/projects/puzzle-punch/', '→'],
     ['https://github.com/carolisengineering/tile-only', '↗'],
@@ -47,7 +49,8 @@ test('case-study tiles put the diagram on a petrol panel; the compact tile has n
   assert.ok(panels[0].contains('panel--primary'));
   assert.ok(panels[1].contains('panel--primary'));
   assert.ok(panels[2].contains('panel--primary'));
-  assert.equal(panels[3].contains('panel--primary') || panels[3].contains('panel--secondary'), false);
+  assert.ok(panels[3].contains('panel--primary'));
+  assert.equal(panels[4].contains('panel--primary') || panels[3].contains('panel--secondary'), false);
 });
 
 test('diagram renders nodes, styles, connectors, and a readable aria-label', () => {
@@ -61,14 +64,14 @@ test('diagram renders nodes, styles, connectors, and a readable aria-label', () 
     ['PostgreSQL', 'node node--secondary'],
   ]);
   assert.deepEqual(d.querySelectorAll('.edge').map((e) => e.classList.contains('edge--both')), [false, false]);
-  const twoWay = tiles()[1].querySelectorAll('.edge').map((e) => e.classList.contains('edge--both'));
+  const twoWay = tiles()[2].querySelectorAll('.edge').map((e) => e.classList.contains('edge--both'));
   assert.deepEqual(twoWay, [false, true]);
   assert.ok(d.querySelectorAll('.edge').every((e) => e.getAttribute('aria-hidden') === 'true'));
 });
 
 test('tags render as a list', () => {
   const tags = tiles()[0].querySelectorAll('.tags li').map((li) => li.text.trim());
-  assert.deepEqual(tags, ['TypeScript', 'React', 'Fastify', 'Prisma', 'PostgreSQL', 'Docker']);
+  assert.deepEqual(tags, ['TypeScript', 'React', 'Fastify', 'Prisma', 'PostgreSQL', 'Docker', 'OpenTelemetry', 'Terraform']);
 });
 
 test('changing weights reorders the tiles, and a tile-only project stays compact', () => {
@@ -122,8 +125,9 @@ test('each tile link is named by its title, described by its summary', () => {
   // A tile is described by its summary alone; the key decision stays in the case study.
   const described = (tile) => tile.getAttribute('aria-describedby').split(' ').map((x) => doc.getElementById(x).text.trim()).join(' | ');
   assert.match(described(tiles()[0]), /^A full-stack workout tracker for use at the gym[^|]*$/);
-  assert.match(described(tiles()[1]), /^AI agent that answers students[^|]*$/);
-  assert.match(described(tiles()[2]), /^A two-player couch co-op game[^|]*$/);
+  assert.match(described(tiles()[1]), /^A photo-first pottery journal[^|]*$/);
+  assert.match(described(tiles()[2]), /^AI agent that answers students[^|]*$/);
+  assert.match(described(tiles()[3]), /^A two-player couch co-op game[^|]*$/);
   // No project currently sets a status, so no tile carries a badge in its accessible name.
   for (const tile of tiles()) {
     assert.equal(tile.querySelector('.status'), null);
