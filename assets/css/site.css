@@ -240,7 +240,7 @@ main:focus { outline: none; }
 .intro + .facts { margin-top: 24px; }
 .fact { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: var(--radius-tile); background: var(--primary-tint); }
 .fact-value { color: var(--text); font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
-.fact-label { color: var(--muted); font-size: 0.875rem; line-height: 1.45; }
+.fact-label { color: var(--muted); font-size: 0.875rem; line-height: 1.45; text-wrap: balance; }
 .timeline { margin: 0; padding: 0; list-style: none; }
 .timeline-row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-top: 1px solid var(--hairline); }
 .timeline-row:last-child { border-bottom: 1px solid var(--hairline); }

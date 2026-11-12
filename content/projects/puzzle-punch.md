@@ -3,7 +3,7 @@ title: Puzzle Punch
 summary: "A two-player couch co-op game in the browser, with a public Firebase build that records anonymous play statistics"
 tags: [Game Design, JavaScript, Firebase, Firestore, Node.js]
 repo: https://github.com/carolisengineering/puzzle-punch-live
-weight: 3
+weight: 4
 diagram:
   - { label: Game Design, next: "→" }
   - { label: Live Build, style: primary, next: "→" }
