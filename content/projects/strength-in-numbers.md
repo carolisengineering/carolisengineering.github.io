@@ -51,19 +51,19 @@ Sets are written through a persisted outbox with client-generated IDs, so a set 
 
 ## Decisions & Tradeoffs
 
-{{< decision >}}Enforce data isolation in the database, not only in the code. Every query already filtered by user, and the cross-user suite found no leak, but one missed filter in a future change would be enough. Row-level security makes Postgres the last check, and the restricted login means even a bug in the app can't turn it off. The cost is two database logins and a stricter migration process.{{< /decision >}}
+{{< decision >}}Enforce data isolation in Postgres with row-level security. Today's filters work, but one missed filter in a future change could leak data. The app connects with a restricted login that can't disable row-level security.  The tradeoff: schema changes need a separate owner login, and every new table needs its own access policies.{{< /decision >}}
 
-**Domain logic in a framework-free package.** CI blocks the shared package from importing React, the DOM, or Node-only APIs, so the same strength math runs in the API, in the browser, and in a future React Native app.
+**Domain logic in a framework-free package.** CI blocks the shared package from importing React, the DOM, or Node-only APIs, so the same training load calculations run in the API, in the browser, and in a future React Native app.
 
 **Backwards-compatible migrations.** A release never drops or renames a column that the running code still reads. Some changes take an extra release, but deploys never need downtime.
 
-**A written spec for every piece of work.** Each feature is split into an API spec and a UI spec, API first, and every acceptance criterion has a test that names it. The process is proportional to a one-person project, but every decision has a written reason.
+**A written spec for every piece of work.** Each feature is split into an API spec and a UI spec. API changes are built first, and every acceptance criterion has a test that names it. Every decision has a written reason.
 
 ## Results
 
-The app has no users yet, so the results so far prioritize correctness:
+The app has only a few casual users, so the work to date prioritizes correctness over scale:
 
-- The cross-user suite covers every route and found no leak, and all 222 SQL statements are classified in the audit.
+- The cross-user tests call every route from one user's account while requesting another users data and none returned it. An audit checks all 222 SQL queries and confirms that each one either filters by user or touches no user data.
 - The personal-record math is checked against a brute-force version with seeded property tests, and against a ten-session fixture worked out by hand.
 - Integration tests run against real PostgreSQL in Testcontainers, as the same restricted role the API uses, and a browser smoke test runs against staging after every deploy.
 - CI runs lint, type-checking, the domain-package purity check, the query audit, a design-token check, and the OpenAPI drift check.
